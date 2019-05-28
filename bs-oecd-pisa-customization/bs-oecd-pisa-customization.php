@@ -36,3 +36,81 @@ function bs_enqueue_files() {
 	// loads JS files in the footer.
 	wp_enqueue_script( 'bs-script', plugin_dir_url( __FILE__ ) . 'assets/js/bs-script.js', '', '1.0.0', true );
 }
+
+//* Show courses archive and single only to student and instructor role
+function bs_show_courses_to_students_instructors() {
+
+  global $wp_query;
+	$user = wp_get_current_user();
+
+  // redirect from 'course' CPT to home page
+  if ( is_archive('sfwd-courses') || is_singular('sfwd-courses') ) :
+
+		// only if not student or instructor role
+		if ( in_array( 'student', (array) $user->roles ) ||
+				 in_array( 'instructor', (array) $user->roles ) ||
+			   current_user_can( 'administrator' )
+			  ) return;
+
+		$url   = get_bloginfo('url');
+		wp_redirect( esc_url_raw( $url ), 301 );
+		exit();
+
+  endif;
+
+}
+add_action ( 'template_redirect', 'bs_show_courses_to_students_instructors', 1);
+
+//* Hide WP dashboard by user role
+function bs_disable_dashboard() {
+
+	// if user is not logged in and in not admin area return
+	if ( ! is_user_logged_in() && ! is_admin() )
+		return;
+
+	$user = wp_get_current_user();
+
+	// we are in admin area, but if current user is not an administrator or an instructor redirect to home
+	if ( ! in_array( 'instructor', (array) $user->roles ) &&
+			 ! current_user_can( 'administrator' )
+		 ) {
+
+		wp_redirect( home_url() );
+		exit;
+
+	}
+
+}
+add_action('admin_init', 'bs_disable_dashboard');
+
+//* Hide admin bar by user role
+function bs_hide_admin_bar() {
+
+	// if user is not logged in return
+	if ( ! is_user_logged_in() )
+		return;
+
+	$user = wp_get_current_user();
+
+	// if current user is not an administrator or an instructor hide admin bar
+	if ( ! in_array( 'instructor', (array) $user->roles ) &&
+			 ! current_user_can( 'administrator' )
+		 ) {
+
+		show_admin_bar(false);
+
+	}
+
+}
+add_action('admin_init', 'bs_hide_admin_bar');
+
+//* Give moderator forum role when a user role is set to Ambassador
+// function bs_ambassador_mod_nominee( $user_id, $role, $old_roles ) {
+//
+//
+// 	if ( 'ambassador' == $role ) {
+// 		bbp_set_user_role( $user_id, 'bbp_moderator' );
+// 	}
+//
+// }
+// add_action( 'set_user_role', 'bs_ambassador_mod_nominee', 30, 3 );

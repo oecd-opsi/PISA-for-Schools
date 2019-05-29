@@ -104,13 +104,15 @@ function bs_hide_admin_bar() {
 }
 add_action('admin_init', 'bs_hide_admin_bar');
 
-//* Give moderator forum role when a user role is set to Ambassador
-// function bs_ambassador_mod_nominee( $user_id, $role, $old_roles ) {
-//
-//
-// 	if ( 'ambassador' == $role ) {
-// 		bbp_set_user_role( $user_id, 'bbp_moderator' );
-// 	}
-//
-// }
-// add_action( 'set_user_role', 'bs_ambassador_mod_nominee', 30, 3 );
+//* Add role class to body
+function add_role_to_body($classes) {
+
+	global $current_user;
+	$user_role = array_shift($current_user->roles);
+
+	$classes .= 'role-'. $user_role;
+	return $classes;
+	
+}
+add_filter('body_class','add_role_to_body');
+add_filter('admin_body_class', 'add_role_to_body');

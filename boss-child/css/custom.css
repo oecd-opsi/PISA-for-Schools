@@ -271,3 +271,13 @@ body .entry-content #features p {
   text-transform: unset;
   font-family: Rubik;
 }
+
+.bp-courses-nav {
+	display: none;
+}
+
+body.role-administrator .bp-courses-nav,
+body.role-instructor .bp-courses-nav,
+body.role-student .bp-courses-nav {
+	display: list-item;
+}

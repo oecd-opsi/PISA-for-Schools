@@ -150,6 +150,10 @@ body.logged-out #inner-wrap {
 	text-transform: uppercase;
 }
 
+.home-page header.entry-header {
+	display: none;
+}
+
 /* Home slider */
 .metaslider .slides,
 .metaslider .slides > li,

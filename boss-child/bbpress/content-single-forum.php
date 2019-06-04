@@ -10,6 +10,7 @@
 ?>
 
 <?php
+// Sort query if a GET parameter is set
 if ( isset( $_GET['sort'] ) ) {
 
   $sort_type = $_GET['sort'];
@@ -24,6 +25,28 @@ if ( isset( $_GET['sort'] ) ) {
 		add_filter('bbp_before_has_topics_parse_args','bs_posts_topic_order');
 
 	}
+}
+
+// Filter query by topic tag if a parameter is set
+if ( isset( $_GET['topictag'] ) ) {
+
+	function bs_filter_topics_by_tag( $args ) {
+
+		$tag = $_GET['topictag'];
+
+		$args['tax_query'] = array(
+	      array(
+	        'taxonomy' => 'topic-tag',
+	        'field' => 'slug',
+	        'terms' => $tag
+	      )
+	    );
+
+		return $args;
+
+	}
+	add_filter('bbp_before_has_topics_parse_args','bs_filter_topics_by_tag');
+
 }
 ?>
 
@@ -41,7 +64,7 @@ if ( isset( $_GET['sort'] ) ) {
             <div class="table-cell">
                 <?php bbp_breadcrumb(); ?>
                 <?php bbp_forum_subscription_link(); ?>
-								<?php do_action( 'bs_forum_details' ); ?>
+								<?php do_action( 'bs_forum_details', bbp_get_forum_id() ); ?>
             </div>
             <?php buddyboss_bbp_single_forum_description(array('before'=>'<div class="bbp-forum-data">', 'after'=>'</div>')); ?>
         </div>

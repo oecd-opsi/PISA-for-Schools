@@ -81,7 +81,7 @@
 					foreach ($topic_tags as $tag) {
 						$tags_array[] = $tag->name;
 					} ?>
-					<div class="bs-topic-tags"><?php echo __( 'Label: ', 'boss' ) . rtrim(implode(', ', $tags_array), ','); ?></div>
+					<div class="bs-topic-tags"><?php echo __( 'Tag: ', 'boss' ) . rtrim(implode(', ', $tags_array), ','); ?></div>
 				<?php endif; ?>
 
 			</p>

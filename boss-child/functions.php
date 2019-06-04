@@ -48,6 +48,11 @@ function boss_child_theme_scripts_styles()
    * Styles
    */
   wp_enqueue_style( 'boss-child-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+
+  /*
+   * Scripts
+   */
+  wp_enqueue_script( 'boss-child-custom-script', get_stylesheet_directory_uri() . '/js/custom.js', 'jquery', '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
 
@@ -100,11 +105,32 @@ add_action( 'template_redirect', 'bs_page_template_redirect_for_not_logged_in_us
 //   }
 // }
 
-//* Add buttons in forum details area to sort topics
-function bs_add_sort_btns() {
+//* Add buttons in forum details area to sort topics and tag selector to filter topics
+function bs_add_sort_btns( $forum_id ) {
 
+  // Sort buttons
 	echo '<a id="bs-sort-by-freshness" class="button" href="?sort=latest">' . __( 'Sort by Latest', 'bs-pisa' ) . '</a>';
 	echo '<a id="bs-sort-by-posts" class="button" href="?sort=top">' . __( 'Sort by Top', 'bs-pisa' ) . '</a>';
 
+  // Tag filter
+  $query = bbp_get_all_child_ids( $forum_id, 'topic' ); // get topic related to current forum
+  $tags_array = array(); // create empty tags array
+
+  foreach ($query as $topic) { // loop query to populate tags array
+    $topic_tags = get_the_terms( $topic, 'topic-tag' );
+    foreach ($topic_tags as $tag) {
+      $tags_array[$tag->slug] =  $tag->name;
+    }
+  }
+  asort( $tags_array ); // sort alphabetically the tags array
+
+  $select_markup = '<label for="tag-filter">Filter by tag: </label><select id="tag-filter"><option value="" data-redirect="' . get_permalink($forum_id) . '">No filter</option>'; // start creating select markup
+  foreach ($tags_array as $key => $value) {
+    $select_markup .= '<option value="' . $key . '" data-redirect="' . get_permalink($forum_id) . '?topictag=' . $key . '">' . $value . '</option>';
+  }
+  $select_markup .= '</select>';
+
+  echo $select_markup;
+
 }
-add_action( 'bs_forum_details', 'bs_add_sort_btns' );
+add_action( 'bs_forum_details', 'bs_add_sort_btns', 10, 1 );

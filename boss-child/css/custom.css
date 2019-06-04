@@ -285,3 +285,39 @@ body.role-instructor .bp-courses-nav,
 body.role-student .bp-courses-nav {
 	display: list-item;
 }
+
+.bbp-forum-details .table-cell {
+	vertical-align: bottom;
+}
+
+.bbp-forum-details .button {
+	font-weight: 800;
+  font-size: 12px;
+  padding: 7px 20px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  text-transform: uppercase;
+	width: auto;
+	margin: 0 4px 4px 0;
+}
+
+.bbp-forum-details .buddyboss-select {
+	margin-bottom: 4px;
+}
+
+.bbp-forum-details .buddyboss-select-inner {
+	height: 30px;
+}
+
+.bbp-forum-details .buddyboss-select-inner span {
+	height: 26px;
+	line-height: 28px;
+}
+
+.bbp-forum-details .buddyboss-select-inner select {
+	height: 28px;
+}
+
+.bbp-forum-details .buddyboss-select-inner:after {
+	top: 5px;
+}

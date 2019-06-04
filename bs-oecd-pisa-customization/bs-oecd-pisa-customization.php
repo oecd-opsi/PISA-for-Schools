@@ -34,7 +34,8 @@ function bs_enqueue_files() {
 	wp_enqueue_style( 'bs-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css' );
 
 	// loads JS files in the footer.
-	wp_enqueue_script( 'bs-script', plugin_dir_url( __FILE__ ) . 'assets/js/bs-script.js', '', '1.0.0', true );
+	// wp_enqueue_script( 'bs-script', plugin_dir_url( __FILE__ ) . 'assets/js/bs-script.js', '', '1.0.0', true );
+
 }
 
 //* Show courses archive and single only to student and instructor role
@@ -105,7 +106,7 @@ function bs_hide_admin_bar() {
 add_action('admin_init', 'bs_hide_admin_bar');
 
 //* Add role class to body
-function add_role_to_body($classes) {
+function bs_add_role_to_body($classes) {
 
 	global $current_user;
 	$user_role = $current_user->roles[0];
@@ -114,5 +115,5 @@ function add_role_to_body($classes) {
 	return $classes;
 
 }
-add_filter('body_class','add_role_to_body');
-add_filter('admin_body_class', 'add_role_to_body');
+add_filter('body_class','bs_add_role_to_body');
+add_filter('admin_body_class', 'bs_add_role_to_body');

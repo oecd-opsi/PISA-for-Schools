@@ -99,3 +99,12 @@ add_action( 'template_redirect', 'bs_page_template_redirect_for_not_logged_in_us
 //     exit();
 //   }
 // }
+
+//* Add buttons in forum details area to sort topics
+function bs_add_sort_btns() {
+
+	echo '<a id="bs-sort-by-freshness" class="button" href="?sort=latest">' . __( 'Sort by Latest', 'bs-pisa' ) . '</a>';
+	echo '<a id="bs-sort-by-posts" class="button" href="?sort=top">' . __( 'Sort by Top', 'bs-pisa' ) . '</a>';
+
+}
+add_action( 'bs_forum_details', 'bs_add_sort_btns' );

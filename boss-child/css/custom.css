@@ -321,3 +321,7 @@ body.role-student .bp-courses-nav {
 .bbp-forum-details .buddyboss-select-inner:after {
 	top: 5px;
 }
+
+#bbpress-forums .topic .bbp-reply-content {
+	font-size: 1.2em;
+}

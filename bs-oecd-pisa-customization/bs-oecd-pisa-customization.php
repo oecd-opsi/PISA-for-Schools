@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name:	Black Studio for OECD PISA for school
-Plugin URI:		https://www.ecorecuperi.it
+Plugin URI:		https://oecdpisaforschools.org
 Description:	Custom functions.
 Version:		1.0.0
 Author:			Black Studio
@@ -117,3 +117,18 @@ function bs_add_role_to_body($classes) {
 }
 add_filter('body_class','bs_add_role_to_body');
 add_filter('admin_body_class', 'bs_add_role_to_body');
+
+//* Forum banner
+function bs_display_forum_banner() {
+
+	// check if is forums related pages
+	if ( ! is_bbpress() && ! is_page( 1657 ) )
+		return;
+
+	$args = array(
+    'id' => 1979,
+	);
+	echo render_view( $args );
+
+}
+add_action( 'buddyboss_inside_wrapper', 'bs_display_forum_banner', 40 );

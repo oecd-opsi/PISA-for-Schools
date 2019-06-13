@@ -31,11 +31,44 @@ add_action( 'wp_enqueue_scripts', 'bs_enqueue_files' );
 function bs_enqueue_files() {
 
 	// loads a CSS file in the head.
-	wp_enqueue_style( 'bs-style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css' );
+	wp_enqueue_style( 'bs-style', plugin_dir_url( __FILE__ ) . 'assets/css/bs-style.css' );
 
 	// loads JS files in the footer.
-	// wp_enqueue_script( 'bs-script', plugin_dir_url( __FILE__ ) . 'assets/js/bs-script.js', '', '1.0.0', true );
+	wp_enqueue_script( 'bs-script', plugin_dir_url( __FILE__ ) . 'assets/js/bs-script.js', '', '1.0.0', true );
 
+}
+
+//* Add ajaxurl js variable to frontend
+add_action('wp_head', 'bs_ajaxurl');
+function bs_ajaxurl() {
+  echo '<script type="text/javascript">
+   				var ajaxurl = "' . admin_url('admin-ajax.php') . '";
+   			</script>';
+}
+
+// Ajax function for recording Closed banner Id
+add_action( 'wp_ajax_record_close_banner', 'record_close_banner' );
+add_action( 'wp_ajax_nopriv_record_close_banner', 'record_close_banner' );
+function record_close_banner() {
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+
+		$closed_banner_id = $_POST['banner_id'];
+
+		$closed_banner = get_user_meta( get_current_user_id(), 'closed_banner', TRUE );
+
+		if ( $closed_banner ) {
+			$closed_banner[] = $closed_banner_id;
+		} else {
+			$closed_banner = array( $closed_banner_id );
+		}
+
+		$response = update_user_meta( get_current_user_id(), 'closed_banner', $closed_banner );
+
+	  echo $response;
+
+		wp_die();
+
+	}
 }
 
 //* Show courses archive and single only to student and instructor role
@@ -125,8 +158,34 @@ function bs_display_forum_banner() {
 	if ( ! is_bbpress() && ! is_page( 1657 ) )
 		return;
 
+	// get closed banner ids
+	$closed_banner = get_user_meta( get_current_user_id(), 'closed_banner', TRUE );
+	$closed_banner_comma_list = rtrim(implode(',', $closed_banner), ',');
+
+	// create target array
+	$target = array( 'everyone' );
+
+		// check if user is new (registered less than 15 days ago)
+		$now = time();
+		$current_user_data = get_userdata( get_current_user_id() );
+		$date_diff = $now - strtotime( $current_user_data->user_registered );
+		$date_diff_day = round( $date_diff / ( 60 * 60 * 24 ) );
+		if ( $date_diff_day <= 15 ) {
+			$target[] = 'new';
+		}
+
+		// check if user is very active on forum (more than 50 topic and reply)
+		$topic_reply_sum = bbp_get_user_reply_count_raw( get_current_user_id() ) + bbp_get_user_topic_count_raw( get_current_user_id() );
+		if ( $topic_reply_sum > 50 ) {
+			$target[] = 'top';
+		}
+
+	$target_comma_list = rtrim(implode(',', $target), ',');
+
 	$args = array(
-    'id' => 1979,
+    'id' 						=> 1979,
+		'closedbanner'	=> $closed_banner_comma_list,
+		'target'				=> $target_comma_list,
 	);
 	echo render_view( $args );
 

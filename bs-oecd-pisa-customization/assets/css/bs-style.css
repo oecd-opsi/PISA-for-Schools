@@ -28,3 +28,18 @@
   width: auto;
   z-index: 100000; /* Above WP toolbar. */
 }
+
+/* FORUM BANNERS */
+.bs-forum-banner {
+  margin: 30px;
+  padding: 30px;
+  border: 3px solid #ea6645;
+  box-shadow: 0 3px 3px #444;
+}
+
+.bs-forum-banner h2,
+.bs-forum-banner p,
+.bs-forum-banner ul,
+.bs-forum-banner ol {
+  margin-bottom: 30px;
+}

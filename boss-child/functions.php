@@ -134,3 +134,27 @@ function bs_add_sort_btns( $forum_id ) {
 
 }
 add_action( 'bs_forum_details', 'bs_add_sort_btns', 10, 1 );
+
+// Filter activity text if it's about a new poll
+function bs_activity_topic_text_for_poll( $activity_text, $user_id, $topic_id, $forum_id ) {
+
+  $poll_id = get_post_meta($topic_id, '_bbp_topic_poll_id', true);
+
+  if ( $poll_id > 0 ) {
+
+    $poll_question = get_the_title( $poll_id );
+
+    $activity_text = str_replace( 'started the topic', 'started the poll <strong>' . $poll_question . '</strong> in the topic', $activity_text);
+
+    return $activity_text;
+
+
+  } else {
+
+    return $activity_text;
+
+  }
+
+
+}
+add_filter( 'bbp_activity_topic_create', 'bs_activity_topic_text_for_poll', 40, 4);

@@ -74,7 +74,7 @@ function bs_class_names($classes) {
 add_action ( 'template_redirect', 'bs_redirect_homepage' );
 function bs_redirect_homepage(){
   if ( is_user_logged_in() && is_front_page() ) {
-    wp_redirect('/logged-in-users-home/') ;
+    wp_redirect('/forum/') ;
     exit();
   }
 }

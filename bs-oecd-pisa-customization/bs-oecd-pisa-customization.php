@@ -38,39 +38,6 @@ function bs_enqueue_files() {
 
 }
 
-//* Add ajaxurl js variable to frontend
-add_action('wp_head', 'bs_ajaxurl');
-function bs_ajaxurl() {
-  echo '<script type="text/javascript">
-   				var ajaxurl = "' . admin_url('admin-ajax.php') . '";
-   			</script>';
-}
-
-// Ajax function for recording Closed banner Id
-add_action( 'wp_ajax_record_close_banner', 'record_close_banner' );
-add_action( 'wp_ajax_nopriv_record_close_banner', 'record_close_banner' );
-function record_close_banner() {
-	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-
-		$closed_banner_id = $_POST['banner_id'];
-
-		$closed_banner = get_user_meta( get_current_user_id(), 'closed_banner', TRUE );
-
-		if ( $closed_banner ) {
-			$closed_banner[] = $closed_banner_id;
-		} else {
-			$closed_banner = array( $closed_banner_id );
-		}
-
-		$response = update_user_meta( get_current_user_id(), 'closed_banner', $closed_banner );
-
-	  echo $response;
-
-		wp_die();
-
-	}
-}
-
 //* Show courses archive and single only to student and instructor role
 function bs_show_courses_to_students_instructors() {
 
@@ -159,8 +126,12 @@ function bs_display_forum_banner() {
 		return;
 
 	// get closed banner ids
-	$closed_banner = get_user_meta( get_current_user_id(), 'closed_banner', TRUE );
-	$closed_banner_comma_list = rtrim(implode(',', $closed_banner), ',');
+	$closed_banner_comma_list = '';
+	if( isset( $_COOKIE['closedBanner'] ) ) {
+
+		$closed_banner_comma_list = str_replace( array( '[', '\"', ']' ), '', $_COOKIE['closedBanner'] );
+
+	}
 
 	// create target array
 	$target = array( 'everyone' );

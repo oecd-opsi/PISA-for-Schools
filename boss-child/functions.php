@@ -70,6 +70,15 @@ function bs_class_names($classes) {
   return $classes;
 }
 
+// Add is-forum class to forum pages body element
+add_filter('body_class','bs_forum_pages');
+function bs_forum_pages($classes) {
+  if ( is_bbpress() || is_page( 1657 ) ) {
+    $classes[] = 'is-forum';
+  }
+  return $classes;
+}
+
 // Redirect to dedicated home page for logged in users
 add_action ( 'template_redirect', 'bs_redirect_homepage' );
 function bs_redirect_homepage(){

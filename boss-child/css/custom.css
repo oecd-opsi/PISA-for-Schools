@@ -325,3 +325,31 @@ body.role-student .bp-courses-nav {
 #bbpress-forums .topic .bbp-reply-content {
 	font-size: 1.2em;
 }
+
+.is-forum .hide-if-forum {
+	display: none;
+}
+
+.is-forum .footer-inner-top .footer-inner.widget-area {
+	padding: 10px;
+}
+
+.is-forum .footer-widget aside {
+	margin-bottom: 0;
+}
+
+.is-forum .footer-widget img {
+	height: 60px !important;
+	width: auto;
+}
+
+
+.is-forum .footer-inner-bottom {
+  padding: 10px 36px 10px 70px;
+}
+
+@media screen and (min-width: 960px) {
+	.is-forum .footer-inner .footer-widget:last-child {
+		float: right;
+	}	
+}

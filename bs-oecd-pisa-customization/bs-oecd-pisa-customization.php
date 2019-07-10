@@ -162,3 +162,34 @@ function bs_display_forum_banner() {
 
 }
 add_action( 'buddyboss_inside_wrapper', 'bs_display_forum_banner', 40 );
+
+// Add widget area on top of forum pages
+function arphabet_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Forum top',
+		'id'            => 'forum_top',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="widgettitle widget-title">',
+		'after_title'   => '</h2>',
+	) );
+
+}
+add_action( 'widgets_init', 'arphabet_widgets_init' );
+function bs_add_forum_top_widget_area() {
+
+	// check if is forums related pages
+	if ( ! is_bbpress() && ! is_page( 1657 ) )
+		return;
+
+	if ( is_active_sidebar( 'forum_top' ) ) :
+
+		echo '<div id="forum-top-widget-area" class="widget-area" role="complementary">';
+			dynamic_sidebar( 'forum_top' );
+		echo '</div><!-- #primary-sidebar -->';
+
+	endif;
+
+}
+add_action( 'buddyboss_inside_wrapper', 'bs_add_forum_top_widget_area', 20 );

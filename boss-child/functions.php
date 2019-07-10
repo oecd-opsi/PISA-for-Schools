@@ -260,23 +260,23 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
 
   // get the excerpt
   $excerpt = get_the_excerpt();
-  $excerpt = substr( $title, 0, 55); // trim excerpt to specific number of characters (55 characters)
+  $excerpt = substr( $title, 0, 136); // trim excerpt to specific number of characters (55 characters)
 
   // determine if odd or even row
   $row_class = ($row_number % 2) ? 'odd' : 'even';
   ?>
     <li class="bbpress-recent-reply-row <?php print $row_class; ?>">
-      <div><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div>
+      <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div>
       <!-- <div>Avatar linked to bbPress Profile:<a href="<?php //print esc_url( bbp_get_user_profile_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php //print get_avatar( get_the_author_meta( 'ID' ) ); ?></a></div> -->
-      <div>
-        <div><?php the_author(); ?></div>
-        <div><?php echo $title; ?></div>
-        <div><?php echo $excerpt; ?></div>
+      <div class="recent-replies-body">
+        <div class="recent-replies-author"><?php the_author(); ?></div>
+        <div class="recent-replies-title"><?php echo $title; ?></div>
+        <div class="recent-replies-excerpt"><?php echo $excerpt; ?></div>
       </div>
       <!-- <div>Link To Reply: <a href="<?php //the_permalink(); ?>">view reply</a></div> -->
       <!-- <div>Link To Topic#Reply: <a href="<?php //print get_permalink( get_post_meta( get_the_ID(), '_bbp_topic_id', true) ); ?>#post-<?php //the_ID(); ?>">view reply</a></div> -->
       <!-- <div>Link To Topic/page/#/#Reply: <a href="<?php //bbp_reply_url( get_the_ID() ); ?>">view reply paged</a></div> -->
-      <div><?php print human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></div>
+      <div class="recent-replies-time-diff"><?php print human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></div>
     </li>
   <?php
 

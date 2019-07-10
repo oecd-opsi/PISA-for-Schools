@@ -31,9 +31,8 @@
 
 /* FORUM BANNERS */
 .bs-forum-banner {
-  margin: 30px;
+  margin: 30px 70px;
   padding: 18px;
-  border: 3px solid #ea6645;
   box-shadow: 0 3px 3px #444;
   font-size: 14px;
   position: relative;
@@ -99,4 +98,41 @@
 .bs-forum-banner-w-bg ul,
 .bs-forum-banner-w-bg ol {
   color: #fff;
+}
+
+.bs-one-line-banner {
+  font-size: 16px;
+  box-shadow: none;
+  background: rgba(100, 170, 195, .23) !important;
+  color: #042C41;
+  padding: 12px 16px;
+}
+
+.bs-one-line-banner a {
+  color: #309CD5;
+}
+
+.bs-one-line-banner .bs-forum-banner-cta-wrapper {
+  top: 0;
+  right: 0;
+}
+
+.bs-one-line-banner .bs-close-forum-banner {
+  background: transparent;
+  color: #0076A0;
+  font-size: 27px;
+  padding: 9px 10px 8px;
+}
+
+/* FORUM TOP WIDGET AREA */
+#forum-top-widget-area {
+  margin: 30px 70px;
+  font-size: 14px;
+  position: relative;
+  float: none;
+}
+
+#forum-top-widget-area .widget-title {
+  font-weight: bold;
+  margin-bottom: .3em;
 }

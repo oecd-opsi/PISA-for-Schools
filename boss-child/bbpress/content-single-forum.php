@@ -60,9 +60,10 @@ if ( isset( $_GET['topictag'] ) ) {
 
 	<?php else : ?>
 
+      <div class="bbp-forum-breadcrumb"><?php bbp_breadcrumb(); ?></div>
+
         <div class="bbp-forum-details">
             <div class="table-cell">
-                <?php bbp_breadcrumb(); ?>
                 <?php bbp_forum_subscription_link(); ?>
 								<?php do_action( 'bs_forum_details', bbp_get_forum_id() ); ?>
             </div>

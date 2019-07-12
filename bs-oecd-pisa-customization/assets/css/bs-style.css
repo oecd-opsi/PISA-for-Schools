@@ -126,10 +126,11 @@
 
 /* FORUM TOP WIDGET AREA */
 #forum-top-widget-area {
-  margin: 30px 70px;
+  padding: 30px;
   font-size: 14px;
   position: relative;
   float: none;
+  width: 100%;
 }
 
 #forum-top-widget-area .widget-title {

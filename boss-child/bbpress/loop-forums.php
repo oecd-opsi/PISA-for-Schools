@@ -36,9 +36,21 @@
 
 		</div>
 
+		<div class="main-forum-sidebar">
 		<?php
+			// display recent replies
 			echo do_shortcode('[bbpress_recent_replies_by_topic show=5 include_empty_topics=true]');
-		 ?>
+
+			// display Forum widget area
+			if ( is_active_sidebar( 'forum_top' ) ) :
+
+				echo '<div id="forum-top-widget-area" class="widget-area" role="complementary">';
+					dynamic_sidebar( 'forum_top' );
+				echo '</div><!-- #primary-sidebar -->';
+
+			endif;
+		?>
+		</div>
 
 	</li><!-- .bbp-body -->
 

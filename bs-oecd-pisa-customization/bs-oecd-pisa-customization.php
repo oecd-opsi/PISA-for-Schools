@@ -122,7 +122,7 @@ add_filter('admin_body_class', 'bs_add_role_to_body');
 function bs_display_forum_banner() {
 
 	// check if is forums related pages
-	if ( ! is_bbpress() && ! is_page( 1657 ) )
+	if ( ! is_bbpress() && ! is_page( 1657 ) || bp_is_home() )
 		return;
 
 	// get closed banner ids
@@ -177,19 +177,3 @@ function arphabet_widgets_init() {
 
 }
 add_action( 'widgets_init', 'arphabet_widgets_init' );
-function bs_add_forum_top_widget_area() {
-
-	// check if is forums related pages
-	if ( ! is_bbpress() && ! is_page( 1657 ) )
-		return;
-
-	if ( is_active_sidebar( 'forum_top' ) ) :
-
-		echo '<div id="forum-top-widget-area" class="widget-area" role="complementary">';
-			dynamic_sidebar( 'forum_top' );
-		echo '</div><!-- #primary-sidebar -->';
-
-	endif;
-
-}
-add_action( 'buddyboss_inside_wrapper', 'bs_add_forum_top_widget_area', 20 );

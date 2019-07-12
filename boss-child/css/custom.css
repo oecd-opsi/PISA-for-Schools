@@ -330,26 +330,26 @@ body.role-student .bp-courses-nav {
 	display: none;
 }
 
-.is-forum .footer-inner-top .footer-inner.widget-area {
+.footer-inner-top .footer-inner.widget-area {
 	padding: 10px;
 }
 
-.is-forum .footer-widget aside {
+.footer-widget aside {
 	margin-bottom: 0;
 }
 
-.is-forum .footer-widget img {
+.footer-widget img {
 	height: 60px !important;
 	width: auto;
 }
 
 
-.is-forum .footer-inner-bottom {
+.footer-inner-bottom {
   padding: 10px 36px 10px 70px;
 }
 
 @media screen and (min-width: 960px) {
-	.is-forum .footer-inner .footer-widget:last-child {
+	.footer-inner .footer-widget:last-child {
 		float: right;
 	}
 }
@@ -395,7 +395,7 @@ body:not(.boxed) #bbpress-forums .subheader {
 		margin: 0;
 	}
 
-	#post-1657 li.bbp-body .latest-replies-list {
+	#post-1657 li.bbp-body .main-forum-sidebar {
 		float: left;
 		width: 26%;
 	}
@@ -580,4 +580,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 #wp-admin-bar-my-account-bp_docs,
 #wp-admin-bar-my-account-photos {
 	display: none;
+}
+
+.wpslacksync-container {
+	max-width: 100% !important;
 }

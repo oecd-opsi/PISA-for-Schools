@@ -83,10 +83,16 @@ function bs_forum_pages($classes) {
 add_action ( 'template_redirect', 'bs_redirect_homepage' );
 function bs_redirect_homepage(){
   if ( is_user_logged_in() && is_front_page() ) {
-    wp_redirect('/forum/') ;
+    wp_redirect('/logged-in-users-home/') ;
     exit();
   }
 }
+
+// Redirect to main forum page after login
+function bs_redirect_after_login() {
+  return '/forum/';
+}
+add_filter('login_redirect', 'bs_redirect_after_login');
 
 /**
 * Redirect buddypress and bbpress pages to registration page
@@ -171,7 +177,7 @@ add_filter( 'bbp_activity_topic_create', 'bs_activity_topic_text_for_poll', 40, 
 // Minify sidenav if forum pages
 function bs_minify_sidenav() {
 
-  if ( ! is_admin() && ( is_bbpress() || is_page( 1657 ) ) ) {
+  if ( ! is_admin() &&  ! bp_is_home() && ( is_bbpress() || is_page( 1657 ) ) ) {
     echo '<script>document.addEventListener( "DOMContentLoaded", function(){ document.querySelector("body").classList.remove("left-menu-open"); } );</script>';
   }
 

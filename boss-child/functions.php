@@ -53,6 +53,13 @@ function boss_child_theme_scripts_styles()
    * Scripts
    */
   wp_enqueue_script( 'boss-child-custom-script', get_stylesheet_directory_uri() . '/js/custom.js', 'jquery', '1.0.0', true );
+
+  // Case study form script and style
+  if ( is_page( 'case-study-form' ) ) {
+    wp_enqueue_style( 'animate-css', get_stylesheet_directory_uri().'/css/animate.css' );
+    wp_enqueue_script( 'case-form-script', get_stylesheet_directory_uri() . '/js/case-form.js', 'jquery', '1.0.0', true );
+  }
+
 }
 add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
 
@@ -298,3 +305,5 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
 add_filter( 'widget_text', 'do_shortcode');
 // don't auto-wrap shortcode that appears on a line of it's own
 add_filter( 'widget_text', 'shortcode_unautop');
+
+// require_once('includes/acf-functions.php');

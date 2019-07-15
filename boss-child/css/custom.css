@@ -109,6 +109,9 @@ You're the boss, so have fun editing!
 }/* don't delete this closing bracket */
 
 /* BS Customization */
+.hidden {
+	display: none;
+}
 
 @media screen and (min-width: 481px) {
 	body.left-menu-open #mastlogo #logo img {
@@ -584,4 +587,54 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .wpslacksync-container {
 	max-width: 100% !important;
+}
+
+/* CASE STUDY FORM */
+.acf-field-group > .acf-label label,
+.acf-field-message > .acf-label label {
+	display: none;
+}
+
+.acf-form ol,
+.acf-form ul {
+	list-style: disc;
+	padding-left: 18px;
+}
+
+.acf-fields>.acf-field {
+	border-top: none;
+}
+
+.form-btns-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.form-btns-wrapper .button,
+.form-btns-wrapper button {
+	margin: 12px;
+}
+
+.form-btns-wrapper .disabled,
+.form-btns-wrapper [disabled] {
+	opacity: .5;
+	pointer-events: none;
+}
+
+.form-btns-wrapper .save::after {
+	content: "\f0c7";
+	font-family: "Font Awesome 5 Free";
+	font-size: 20px;
+  margin-left: 8px;
+}
+
+.form-btns-wrapper .submit::after {
+	content: "\f14a";
+	font-family: "Font Awesome 5 Free";
+	font-size: 20px;
+  margin-left: 8px;
+}
+
+#case-form .acf-form-submit input {
+	display: none;
 }

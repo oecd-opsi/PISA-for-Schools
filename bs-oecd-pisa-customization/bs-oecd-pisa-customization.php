@@ -164,7 +164,7 @@ function bs_display_forum_banner() {
 add_action( 'buddyboss_inside_wrapper', 'bs_display_forum_banner', 40 );
 
 // Add widget area on top of forum pages
-function arphabet_widgets_init() {
+function bs_forum_top_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => 'Forum top',
@@ -176,4 +176,4 @@ function arphabet_widgets_init() {
 	) );
 
 }
-add_action( 'widgets_init', 'arphabet_widgets_init' );
+add_action( 'widgets_init', 'bs_forum_top_widgets_init' );

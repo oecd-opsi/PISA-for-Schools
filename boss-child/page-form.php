@@ -16,13 +16,20 @@ get_header();
 
         <div id="primary" class="site-content">
 
+
             <div id="content" role="main">
 
                 <?php while ( have_posts() ) : the_post(); ?>
 
                     <h1><?php the_title(); ?></h1>
 
+                    <?php if ( is_active_sidebar('case_study_form') ) :
+                      get_sidebar('case_study_form');
+                    endif; ?>
+
                     <?php
+                    $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+                    $actual_link = "http://{$_SERVER['HTTP_HOST']}{$uri_parts[0]}";
                     $settings = array(
 
                     	/* (string) Unique identifier for the form. Defaults to 'acf-form' */
@@ -52,7 +59,7 @@ get_header();
                     	/* (string) The URL to be redirected to after the form is submit. Defaults to the current URL with a GET parameter '?updated=true'.
                     	A special placeholder '%post_url%' will be converted to post's permalink (handy if creating a new post)
                     	A special placeholder '%post_id%' will be converted to post's ID (handy if creating a new post) */
-                    	'return' => '',
+                    	'return' => $actual_link . '?edit=%post_id%',
                     	/* (string) Extra HTML to add before the fields */
                     	'html_before_fields' => '',
                     	/* (string) Extra HTML to add after the fields */
@@ -85,6 +92,12 @@ get_header();
                     	'kses'	=> true
 
                     );
+
+                    // if is set edit parameter in URL
+                    if ( isset( $_GET['edit'] ) && intval( $_GET['edit'] ) > 0 ) {
+            					$settings['post_id'] 		= $_GET['edit'];
+            					$settings['new_post'] 		= false;
+            				}
                      ?>
 
                     <?php acf_form( $settings ); ?>
@@ -94,8 +107,5 @@ get_header();
             </div><!-- #content -->
         </div><!-- #primary -->
 
-    <?php if ( is_active_sidebar('sidebar') ) :
-        get_sidebar('sidebar');
-    endif; ?>
     </div>
 <?php get_footer(); ?>

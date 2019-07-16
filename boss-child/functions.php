@@ -306,4 +306,19 @@ add_filter( 'widget_text', 'do_shortcode');
 // don't auto-wrap shortcode that appears on a line of it's own
 add_filter( 'widget_text', 'shortcode_unautop');
 
-// require_once('includes/acf-functions.php');
+// Add Case study form widget area
+function bs_case_form_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Case study form',
+		'id'            => 'case_study_form',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="widgettitle widget-title">',
+		'after_title'   => '</h2>',
+	) );
+
+}
+add_action( 'widgets_init', 'bs_case_form_widgets_init' );
+
+require_once('includes/acf-functions.php');

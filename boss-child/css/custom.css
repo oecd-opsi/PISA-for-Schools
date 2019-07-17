@@ -722,3 +722,83 @@ body:not(.boxed) #bbpress-forums .subheader {
 [data-taxonomy="description-tag"] .acf-checkbox-list {
 	columns: 3;
 }
+
+/* Case studies Archive */
+.case-study-archive-content {
+	padding: 30px 70px;
+}
+
+.filter-bar-top {
+	display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 8px 16px
+}
+
+.case-study-card {
+	margin: 56px 0;
+}
+
+.case-study-card header {
+	display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+  margin-bottom: 16px;
+}
+
+.case-study-card header .post-country {
+	display: flex;
+	align-items: center;
+}
+
+.case-study-card header .post-country img {
+	width: 48px;
+	margin-left: 8px;
+}
+
+.case-study-card .case-card-content {
+	display: flex;
+}
+
+.case-study-card .case-card-left-column {
+	flex-basis: 20%;
+}
+
+.case-study-card .case-card-left-column .author {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.case-study-card .case-card-left-column .author img {
+	margin-right: 12px;
+}
+
+.case-study-card .case-card-left-column .author a {
+	display: block;
+}
+
+.case-study-card .case-card-left-column .description-tags-wrapper a {
+	display: inline-block;
+	padding: 4px 8px;
+	background: #f5f5f5;
+	border-radius: 6px;
+	margin: 4px;
+	white-space: nowrap;
+}
+
+.case-study-card .case-card-right-column {
+	flex-basis: 80%;
+	padding: 0 30px;
+}
+
+.case-study-card .case-card-right-column .case-excerpt {
+	margin-bottom: 24px;
+}
+
+.jvectormap-tip {
+	z-index: 99;
+}

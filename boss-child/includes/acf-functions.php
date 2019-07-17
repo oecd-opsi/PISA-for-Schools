@@ -4,7 +4,7 @@ add_action('acf/validate_save_post', 'bs_clear_all_errors', 10, 0);
 function bs_clear_all_errors() {
   if ( ! isset( $_POST['field_5d2d9016a2abe'] ) || $_POST['field_5d2d9016a2abe'] == 'draft' ) {
     acf_reset_validation_errors();
-  } 
+  }
 }
 
 // manipulate the case study AFTER it has been saved
@@ -24,19 +24,26 @@ function bs_acf_save_post( $post_id ) {
     $post_title = $school_details['school_name'];
   }
 
-  // Get Select status value
-  $status = get_field( 'select_status', $post_id );
 
   // Update post title
   $content = array(
 		'ID' => $post_id,
 		'post_title' => $post_title,
 		'post_content' => '',
-    'post_status' => $status,
 	);
+
 
 	wp_update_post($content);
 
+  // if not in admin dashboard, update status based on Select status hidden field
+  if ( ! is_admin() ) {
+    // Get Select status value
+    $status = get_field( 'select_status', $post_id );
+
+    wp_update_post( array( 'post_status' => $status, ) );
+
+  }
+  
 	// // set the features image
 	// $material = get_field( 'materials_&_short_explanation', $post_id );
 	// $photo_and_video = $material['photo_and_video'];

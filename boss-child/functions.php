@@ -60,6 +60,13 @@ function boss_child_theme_scripts_styles()
     wp_enqueue_script( 'case-form-script', get_stylesheet_directory_uri() . '/js/case-form.js', 'jquery', '1.0.0', true );
   }
 
+  // jVectorMap
+  if ( is_post_type_archive( 'case' ) ) {
+    wp_enqueue_style( 'jvectormap-css', get_stylesheet_directory_uri().'/css/jquery-jvectormap-2.0.3.css' );
+    wp_enqueue_script( 'jvectormap-script', get_stylesheet_directory_uri() . '/js/jquery-jvectormap-2.0.3.min.js', 'jquery', '1.0.0', false );
+    wp_enqueue_script( 'jvectormap-worldmap-script', get_stylesheet_directory_uri() . '/js/jquery-jvectormap-world-mill.js', 'jquery', '1.0.0', false );
+  }
+
 }
 add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
 
@@ -322,3 +329,80 @@ function bs_case_form_widgets_init() {
 add_action( 'widgets_init', 'bs_case_form_widgets_init' );
 
 require_once('includes/acf-functions.php');
+
+// Shortcode to get Country term ISO code
+function country_term_iso() {
+
+  global $post;
+
+  $terms = get_the_terms( $post->ID, 'country' );
+
+  return $ISO = get_field( 'iso_code', $terms[0] );
+
+}
+add_shortcode( 'country-iso', 'country_term_iso' );
+
+// // Shortcode to display Case Studies map
+function case_map_func() {
+
+  // init output
+  $output = '<div id="world-map" style="height: 400px;"></div>';
+
+  // get Country terms and build array
+  $terms = get_terms( array(
+    'taxonomy'    => 'country',
+    'hide_empty'  => false,
+  ) );
+
+  $output .= '<script>var countriesData = {';
+
+  foreach ($terms as $term) {
+    $iso = get_field( 'iso_code', $term );
+    $count = $term->count;
+    if ( $iso && $count > 0 )
+      $output .= '"' . $iso . '": ' . $count . ',';
+  }
+
+  $output .= '};';
+
+  // jvectorMap creation
+  $output .= "
+  $('#world-map').vectorMap({
+    map: 'world_mill',
+    backgroundColor: '#042C41',
+    regionStyle: {
+			initial: {
+				fill: 'white',
+				'fill-opacity': .95,
+			},
+			hover: {
+				'fill-opacity': 1
+			},
+			selected: {
+				fill: 'yellow'
+			},
+			selectedHover: {}
+		},
+    series: {
+      regions: [{
+        values: countriesData,
+        scale: ['#c6da50', '#00ae88'],
+        normalizeFunction: 'linear'
+      }]
+    },
+    onRegionTipShow: function(e, el, code){
+      if ( countriesData[code] > 0 ) {
+        el.html( '<div class=\"map-tips\">' + el.html() + ' (N. of cases: ' + countriesData[code] + ')</div>' );
+      } else {
+        el.html( '<div class=\"map-tips\">' + el.html() + ' (No cases submitted)</div>' );
+      }
+    }
+  });
+  ";
+
+  $output .= '</script>';
+
+  return $output;
+
+}
+add_shortcode( 'case-map', 'case_map_func');

@@ -212,7 +212,7 @@ function custom_bbpress_recent_replies_by_topic($atts){
   $meta_key = '_bbp_last_reply_id';
 
   // allow for topics with no replies
-  if ($include_empty_topics) {
+  if ( $include_empty_topics ) {
     $meta_key = '_bbp_last_active_id';
     $post_types[] = 'topic';
   }
@@ -329,6 +329,7 @@ function bs_case_form_widgets_init() {
 add_action( 'widgets_init', 'bs_case_form_widgets_init' );
 
 require_once('includes/acf-functions.php');
+require_once('includes/buddypress.php');
 
 // Shortcode to get Country term ISO code
 function country_term_iso() {
@@ -406,3 +407,56 @@ function case_map_func() {
 
 }
 add_shortcode( 'case-map', 'case_map_func');
+
+// Return true if user can edit form
+function can_edit_acf_form( $post_id = 0, $user_id = 0, $allowed_statuses = array( 'draft', 'pending', 'archive', 'reviewed' ) ) {
+
+	if ( intval( $user_id ) == 0 && get_current_user_id() > 0 ) {
+
+		$user_id = get_current_user_id();
+
+	}
+
+	if ( intval( $post_id ) == 0 ) {
+
+		global $post;
+
+		if ( !empty( $post ) ) {
+			$post_id = $post->ID;
+		}
+
+	}
+
+
+	if ( intval( $post_id ) > 0 && intval( $user_id ) > 0 ) {
+
+		$post_author = get_post_field( 'post_author', $post_id );
+		$post_status = get_post_field( 'post_status', $post_id );
+
+		if ( intval( $post_author ) == $user_id && ( in_array( $post_status, $allowed_statuses ) || $allowed_statuses[0] == 'any' ) ) {
+			return true;
+		}
+
+	}
+
+	return false;
+
+}
+
+// Profile link shortcode
+function profilelink_func ( $atts ) {
+
+	$a = shortcode_atts( array(
+        'user_id' => '',
+        'text' => '',
+        'class' => '',
+    ), $atts );
+
+	if ( intval( $a['user_id'] ) > 0 ) {
+		return '<a href="'. bp_core_get_user_domain( $user_id ) .'case-studies/" class="'. $a['class'] .'" >'. $a['text'] .'</a>';
+	} else {
+		$user = wp_get_current_user();
+		return '<a href="'. bp_core_get_user_domain( $user->ID ) .'case-studies/" class="'. $a['class'] .'" >'. $a['text'] .'</a>';
+	}
+}
+add_shortcode( 'profilelink', 'profilelink_func' );

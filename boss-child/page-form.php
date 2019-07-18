@@ -14,11 +14,26 @@ get_header();
     <div class="page-full-width">
 <?php endif; ?>
 
-        <div id="primary" class="site-content">
+        <div id="primary" class="site-content form-related-page">
 
 
             <div id="content" role="main">
 
+                <!-- If user can't edit form display a message -->
+                <?php if ( isset( $_GET['edit'] ) && intval( $_GET['edit'] ) > 0 && ! can_edit_acf_form( intval( $_GET['edit'] ) ) ) :	?>
+                    <div class="form-notice">
+              				<h3><?php echo __( 'Sorry, you cannot edit a case study that was submitted by someone else or a case study that has already been published. If you need to make changes to a published case study, please contact the PISA for Schools team at', 'bs-pisa' ); ?> <a href="mailto:pisa@oecd.org">pisa@oecd.org</a></h3>
+                      <p><a href="<?php echo $bp->loggedin_user->domain . 'case-studies/'; ?>" class="button">
+                          <i class="fa fa-chevron-left" aria-hidden="true"></i>  <?php echo __( 'Back', 'bs-pisa' ); ?>
+                			</a></p>
+
+                		</div>
+              		<?php
+              		get_footer();
+              		return;
+              	endif; ?>
+
+                <!-- Display form -->
                 <?php while ( have_posts() ) : the_post(); ?>
 
                     <h1><?php the_title(); ?></h1>

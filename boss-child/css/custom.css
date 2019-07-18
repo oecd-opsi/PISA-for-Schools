@@ -616,7 +616,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .form-btns-wrapper .disabled,
-.form-btns-wrapper [disabled] {
+.form-btns-wrapper [disabled],
+.button.disabled {
 	opacity: .5;
 	pointer-events: none;
 }
@@ -763,25 +764,26 @@ body:not(.boxed) #bbpress-forums .subheader {
 	display: flex;
 }
 
-.case-study-card .case-card-left-column {
+.case-study-card .case-card-main-columnumn {
 	flex-basis: 20%;
 }
 
-.case-study-card .case-card-left-column .author {
+.case-study-card .case-card-main-columnumn .author {
 	display: flex;
 	align-items: center;
 	margin-bottom: 16px;
 }
 
-.case-study-card .case-card-left-column .author img {
+.case-study-card .case-card-main-columnumn .author img {
 	margin-right: 12px;
 }
 
-.case-study-card .case-card-left-column .author a {
+.case-study-card .case-card-main-columnumn .author a {
 	display: block;
 }
 
-.case-study-card .case-card-left-column .description-tags-wrapper a {
+.case-study-card .case-card-main-columnumn .description-tags-wrapper a,
+.single-case .side-column .description-tags a {
 	display: inline-block;
 	padding: 4px 8px;
 	background: #f5f5f5;
@@ -801,4 +803,126 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .jvectormap-tip {
 	z-index: 99;
+}
+
+.form-notice {
+	padding: 70px 30px;
+}
+
+.form-notice-success {
+	padding: 70px 30px;
+	float: left;
+	width: 70%;
+}
+
+.form-related-page {
+	width: 100%;
+}
+
+/* SINGLE CASE */
+.site-content.single-case {
+	padding: 70px 30px;
+}
+
+.single-case .main-column {
+	float: left;
+	width: 76%;
+}
+.single-case .side-column {
+	float: left;
+	width: 20%;
+	margin: 0 16px;
+}
+
+.single-case .side-column > div {
+	background: #f5f5f5;
+	padding: 16px;
+
+}
+
+.single-case .main-column .featured-image {
+	margin-bottom: 16px;
+}
+
+.single-case .main-column h2 button {
+  all: inherit;
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5em 0;
+	background: #f5f5f5;
+	margin-bottom: 16px;
+	padding: 8px;
+	font-size: 22px;
+	box-sizing: border-box;
+}
+
+.single-case .main-column h2 button:focus svg {
+  outline: 2px solid;
+}
+
+.single-case .main-column button svg {
+  height: 1em;
+  margin-left: 0.5em;
+}
+
+.single-case .main-column [aria-expanded="true"] .vert {
+  display: none;
+}
+
+.single-case .main-column [aria-expanded] rect {
+  fill: currentColor;
+}
+
+.single-case .main-column .form-question {
+	padding: 8px;
+}
+
+.single-case .main-column h3 {
+	font-size: 20px;
+}
+
+.single-case .side-column .case-country {
+	display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+.single-case .side-column .case-country img {
+	margin-right: 8px;
+}
+
+.single-case .side-column .school-details p {
+	margin-bottom: 1em;
+}
+
+.single-case .side-column .description-tags {
+	background: transparent;
+}
+
+.single-case .side-column .description-tags h2 {
+	font-size: 18px;
+}
+
+.single-case .side-column .case-author .author-badge {
+	display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.single-case .side-column .case-author .author-badge img {
+	border-radius: 100%;
+	margin-right: 8px;
+}
+
+.single-case .side-column .case-author .button {
+	font-size: 12px;
+	padding: 8px;
+	width: auto;
+	margin: 8px;
+}
+
+.single-case .side-column .case-author .button i {
+	margin-left: 4px;
 }

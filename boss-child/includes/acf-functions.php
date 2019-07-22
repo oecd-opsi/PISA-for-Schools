@@ -1,4 +1,17 @@
 <?php
+// Add options page
+if( function_exists('acf_add_options_page') ) {
+
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme General Settings',
+		'menu_title'	=> 'Theme Settings',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+
+}
+
 // Reset validation erros on form "save as a draft"
 add_action('acf/validate_save_post', 'bs_clear_all_errors', 10, 0);
 function bs_clear_all_errors() {
@@ -58,32 +71,5 @@ function bs_acf_save_post( $post_id ) {
 		wp_safe_redirect( get_the_permalink( 2320 ) );
 		die;
 	}
-
-}
-
-// redirect to the proper page after form submission
-// add_action('acf/submit_form', 'bs_case_study_form_redirect_after_submit', 0, 2);
-function bs_case_study_form_redirect_after_submit( $form, $post_id ) {
-
-	// if( $_POST['field_5d2d9016a2abe'] == 'pending' ) {
-	// 	wp_safe_redirect( get_the_permalink( 2320 ) );
-	// 	die;
-	// }
-
-	// if( $_POST['csf_action'] == 'save' ) {
-  //
-	// 	$case_study_form_page = $_SERVER['REQUEST_URI'];
-  //
-	// 	$step = ( isset( $_POST['form_step'] ) && intval( $_POST['form_step'] ) > 0 ? intval( $_POST['form_step'] ) : 0 );
-  //
-	// 	wp_safe_redirect( get_the_permalink( $case_study_form_page ).'?edit='.$post_id.'&updated=true#step-'.$step );
-	// 	die;
-	// }
-
-	// if( $_POST['csf_action'] == 'saveandpreview' ) {
-  //
-	// 	wp_safe_redirect( get_the_permalink( $post_id ) );
-	// 	die;
-	// }
 
 }

@@ -460,3 +460,212 @@ function profilelink_func ( $atts ) {
 	}
 }
 add_shortcode( 'profilelink', 'profilelink_func' );
+
+// Chck if user can delete case study
+function can_delete_cs( $post_id = 0, $user_id = 0 ) {
+
+  // if no user ID is declared, get current user
+  if ( intval( $user_id ) == 0 && get_current_user_id() > 0 ) {
+		$user_id = get_current_user_id();
+	}
+
+  // if no post ID is declared, get current post
+	if ( intval( $post_id ) == 0 ) {
+
+		global $post;
+
+		if ( !empty( $post ) ) {
+			$post_id = $post->ID;
+		}
+
+	}
+
+	if ( intval( $post_id ) > 0 && intval( $user_id ) > 0 ) {
+
+		$post_author = get_post_field( 'post_author', $post_id );
+		$post_status = get_post_field( 'post_status', $post_id );
+
+		if ( intval( $post_author ) == $user_id ) {
+			if ( $post_status == 'draft' ) {
+				return 'delete';
+			}
+			if ( $post_status == 'pending' || $post_status == 'publish' || $post_status == 'reviewed' ) {
+				return 'request';
+			}
+		}
+
+	}
+
+	return false;
+
+}
+
+// Add Case studies custom post statuses
+function bs_case_studies_custom_post_statuses() {
+
+  register_post_status( 'pending_deletion', array(
+		'label'                     => _x( 'Pending Deletion', 'bs_pisa' ),
+		'public'                    => false,
+		'exclude_from_search'       => true,
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'label_count'               => _n_noop( 'Pending Deletion <span class="count">(%s)</span>', 'Pending Deletion <span class="count">(%s)</span>' ),
+	) );
+
+	register_post_status( 'reviewed', array(
+		'label'                     => _x( 'Reviewed – Not Currently Published', 'bs_pisa' ),
+		'public'                    => false,
+		'exclude_from_search'       => true,
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'label_count'               => _n_noop( 'Reviewed <span class="count">(%s)</span>', 'Reviewed <span class="count">(%s)</span>' ),
+	) );
+
+}
+add_action( 'init', 'bs_case_studies_custom_post_statuses' );
+add_action('admin_footer-post-new.php', 'opsi_append_post_status_list');
+add_action('admin_footer-post.php', 'opsi_append_post_status_list');
+function opsi_append_post_status_list(){
+     global $post;
+     $complete = '';
+     $label = '';
+     if($post->post_type == 'case'){
+
+		  $complete = '';
+          if($post->post_status == 'pending_deletion'){
+               $complete = ' selected=\'selected\'';
+               $label = '<span id="post-status-display"> '. __('Pending Deletion', 'opsi') .'</span>';
+          }
+		  echo '
+		  <script>
+		  jQuery(document).ready(function($){
+			   $("select#post_status").append("<option value=\'pending_deletion\' '.$complete.'>'. __('Pending Deletion', 'opsi') .'</option>");
+			   $(".misc-pub-section label").append("'.$label.'");
+		  });
+		  </script>
+		  ';
+
+		  $complete = '';
+          if($post->post_status == 'reviewed'){
+               $complete = ' selected=\'selected\'';
+               $label = '<span id="post-status-display"> '. __('Reviewed', 'opsi') .'</span>';
+          }
+		  echo '
+		  <script>
+		  jQuery(document).ready(function($){
+			   $("select#post_status").append("<option value=\'reviewed\' '.$complete.'>'. __('Reviewed', 'opsi') .'</option>");
+			   $(".misc-pub-section label").append("'.$label.'");
+		  });
+		  </script>
+		  ';
+
+     }
+}
+
+function opsi_custom_status_add_in_quick_edit() {
+	echo "<script>
+	jQuery(document).ready( function() {
+		jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"pending_deletion\">". __('Pending Deletion', 'opsi') ."</option>' );
+		jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"reviewed\">". __('Reviewed', 'opsi') ."</option>' );
+	});
+	</script>";
+}
+add_action('admin_footer-edit.php','opsi_custom_status_add_in_quick_edit');
+
+function opsi_display_archive_state( $states ) {
+   global $post;
+   $arg = get_query_var( 'post_status' );
+
+   if($arg == 'pending_deletion'){
+    if($post->post_status == 'pending_deletion'){
+      echo  ' - '.__('Pending Deletion', 'opsi');
+    }
+   }
+   if($arg == 'reviewed'){
+    if($post->post_status == 'reviewed'){
+      echo  ' - '.__('Reviewed', 'opsi');
+    }
+   }
+  return $states;
+}
+add_filter( 'display_post_states', 'opsi_display_archive_state' );
+
+// Admin notice about pending users and cases
+function bs_pisa_admin_notice() {
+
+  // Get pending Cases
+  $args = array(
+		'fields'		=> 'ids',
+		'post_type'		=> 'case',
+		'post_status'	=> 'pending',
+		'posts_per_page' => -1,
+	);
+
+	$query = new WP_Query( $args );
+	if ( $query->post_count > 0 ) {
+    ?>
+    <div class="notice notice-warning is-dismissible">
+        <p><a href="<?php admin_url(); ?>edit.php?post_status=pending&post_type=case"><strong><?php echo sprintf( __( 'There are %d pending Case Studies', 'bs_pisa' ), $query->post_count ); ?></strong></a></p>
+    </div>
+    <?php
+	}
+
+
+	// Get the total number of users for the current query. I use (int) only for sanitize.
+	$users_count = count( get_users( array( 'fields' => array( 'ID' ), 'role' => 'pending' ) ) );
+	// Echo a string and the value
+	if ( $users_count > 0 ) {
+	?>
+	<div class="notice notice-warning is-dismissible">
+        <p><a href="<?php admin_url(); ?>users.php?role=pending"><strong><?php echo sprintf( __( 'There are %d Pending Users', 'bs_pisa' ), $users_count ); ?></strong></a></p>
+    </div>
+	<?php
+	}
+
+}
+add_action( 'admin_notices', 'bs_pisa_admin_notice', 100 );
+
+// Force login for case study form
+add_action( 'template_redirect', 'case_study_form_template_redirect' );
+function case_study_form_template_redirect() {
+	if( is_page( 2198 ) && !is_user_logged_in() ) {
+		wp_redirect( wp_login_url( get_permalink( get_page_by_path( 2198 ) ) ) );
+		die;
+	}
+}
+
+// Send an email to user when a case study is published
+add_action( 'pending_to_publish', 'bs_case_study_on_publish_post', 10, 1 );
+function bs_case_study_on_publish_post( $post ) {
+
+	if ( 'case' === get_post_type() ) { // check the custom post type
+
+		$cstitle   	= get_the_title( $post->ID );
+		$cslink   	= get_the_permalink( $post->ID );
+
+		$author_mail 		= get_the_author_meta( 'user_email', $post->post_author );
+		$author_fname 		= get_the_author_meta( 'first_name', $post->post_author );
+		$author_lname 		= get_the_author_meta( 'last_name', $post->post_author );
+		$author_fullname 	= $author_fname.' '. $author_lname;
+
+    $subject = get_field( 'author_published_notification_subject', 'option' );
+    $mail_content = get_field( 'author_published_notification_mail', 'option' );
+		$body    = str_replace( array( '%authorname%', '%casestudylink%', '%casestudytitle%' ), array( $author_fullname, $cslink, $cstitle ), $mail_content );
+
+		$headers = array('Content-Type: text/html; charset=UTF-8');
+
+		wp_mail( $author_mail, $subject, $body, $headers );
+
+
+		// create notification for buddypress
+		bp_notifications_add_notification( array(
+			'user_id'           => $post->post_author,
+			'item_id'           => $post->ID,
+			'component_name'    => 'innovations',
+			'component_action'  => 'innovations_notification_action',
+			'date_notified'     => bp_core_current_time(),
+			'is_new'            => 1,
+		) );
+
+	}
+}

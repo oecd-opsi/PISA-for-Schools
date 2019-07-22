@@ -33,6 +33,47 @@ get_header();
               		return;
               	endif; ?>
 
+                <!-- Manage delete request -->
+                <?php
+                if ( isset( $_GET['delete'] ) && intval( $_GET['delete'] ) > 0 ) {
+
+              		$can_delete_cs = can_delete_cs( intval( $_GET['delete'] ) );
+
+              		if ( !can_delete_cs( intval( $_GET['delete'] ) ) ) { // if user can't delete
+              			?>
+              			<div class="form-notice">
+            					<h3><strong>Error!</strong> <?php echo __( 'You can not delete this case study.', 'bs_pisa' ); ?></h3>
+              			</div>
+              			<?php
+              			get_footer();
+              			return;
+              		} else {
+              			if ( isset( $_GET['confirm'] ) && intval( $_GET['confirm'] ) == 1 ) { // user has confirmed deletion
+
+              				if ( $can_delete_cs == 'delete' ) {
+              					wp_delete_post( intval( $_GET['delete'] ) );
+              				}
+
+              				if ( $can_delete_cs == 'request' ) {
+              					wp_update_post( array( 'ID' => intval( $_GET['delete'] ), 'post_status' => 'pending_deletion' ) );
+              				}
+
+              				wp_safe_redirect( get_bloginfo('url') . '/members/'. $current_user->user_login . '/profile/');
+              				exit();
+
+              			} else { // user has to confirm deletion
+              			?>
+              				<div class="form-notice">
+            						<h3><a class="button" href="<?php echo get_permalink( $post->ID ); ?>?delete=<?php echo intval( $_GET['delete'] ); ?>&confirm=1"><?php echo __( 'Please confirm deleting this case study by clicking here.', 'bs_pisa' ); ?></a></h3>
+              				</div>
+              			<?php
+              			}
+              		}
+              		get_footer();
+              		return;
+              	}
+                ?>
+
                 <!-- Display form -->
                 <?php while ( have_posts() ) : the_post(); ?>
 

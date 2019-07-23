@@ -729,6 +729,17 @@ body:not(.boxed) #bbpress-forums .subheader {
 	padding: 30px 70px;
 }
 
+.case-study-archive-content {
+	float: left;
+	width: 76%;
+	box-sizing: border-box;
+}
+.side-filters {
+	float: left;
+	width: 20%;
+	margin: 30px 16px 16px;
+}
+
 .filter-bar-top {
 	display: flex;
   justify-content: space-between;
@@ -764,25 +775,25 @@ body:not(.boxed) #bbpress-forums .subheader {
 	display: flex;
 }
 
-.case-study-card .case-card-main-columnumn {
+.case-study-card .case-card-left-column {
 	flex-basis: 20%;
 }
 
-.case-study-card .case-card-main-columnumn .author {
+.case-study-card .case-card-left-column .author {
 	display: flex;
 	align-items: center;
 	margin-bottom: 16px;
 }
 
-.case-study-card .case-card-main-columnumn .author img {
+.case-study-card .case-card-left-column .author img {
 	margin-right: 12px;
 }
 
-.case-study-card .case-card-main-columnumn .author a {
+.case-study-card .case-card-left-column .author a {
 	display: block;
 }
 
-.case-study-card .case-card-main-columnumn .description-tags-wrapper a,
+.case-study-card .case-card-left-column .description-tags-wrapper a,
 .single-case .side-column .description-tags a {
 	display: inline-block;
 	padding: 4px 8px;

@@ -669,3 +669,17 @@ function bs_case_study_on_publish_post( $post ) {
 
 	}
 }
+
+// Autopopulate Submission date field on Case studies submission
+add_action( 'draft_to_pending', 'bs_submission_date');
+function bs_submission_date( $post ) {
+
+  // check if post is a Case Study
+  if ( ! 'case' == $post->post_type )
+    return;
+
+  // get current date and populate Submission field
+  $now = date( 'd/m/Y' );
+  update_field( 'submission_date', $now, $post->ID );
+
+}

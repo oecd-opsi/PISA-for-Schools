@@ -32,11 +32,11 @@ function bs_acf_save_post( $post_id ) {
 	}
 
   // Get School Details field group
-  $postassessment_learning = get_field( 'post-assessment_learning', $post_id );
+  $case_study_summary = get_field( 'case_study_summary', $post_id );
   // Create title
   $post_title = __( 'Untitled case study', 'bs_pisa' );
-  if ( ! $postassessment_learning['please_suggest_a_title_for_your_case_study'] == '' || ! empty( $postassessment_learning['please_suggest_a_title_for_your_case_study'] ) ) {
-    $post_title = $postassessment_learning['please_suggest_a_title_for_your_case_study'];
+  if ( ! $case_study_summary['title_of_case_study'] == '' || ! empty( $case_study_summary['title_of_case_study'] ) ) {
+    $post_title = $case_study_summary['title_of_case_study'];
   }
 
 

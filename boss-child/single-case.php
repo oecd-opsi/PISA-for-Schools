@@ -56,6 +56,11 @@ function group_field( $group_key ) {
                         </div>
                         <?php endif; ?>
 
+                        <?php
+                        $excerpt = get_field( 'case_study_summary_short_and_simple_explanation' );
+                        ?>
+                        <div class="case-excerpt"><?php echo $excerpt ?></div>
+
                         <div class="questions">
                         <?php
                         group_field( 'field_5d2c2d47c6a69' );

@@ -188,10 +188,10 @@ function bs_activity_topic_text_for_poll( $activity_text, $user_id, $topic_id, $
 }
 add_filter( 'bbp_activity_topic_create', 'bs_activity_topic_text_for_poll', 40, 4);
 
-// Minify sidenav if forum pages
+// Minify sidenav if forum or Case study form pages
 function bs_minify_sidenav() {
 
-  if ( ! is_admin() &&  ! bp_is_home() && ( is_bbpress() || is_page( 1657 ) ) ) {
+  if ( ! is_admin() &&  ! bp_is_home() && ( is_bbpress() || is_page( 1657 ) || is_page( 2198 ) ) ) {
     echo '<script>document.addEventListener( "DOMContentLoaded", function(){ document.querySelector("body").classList.remove("left-menu-open"); } );</script>';
   }
 

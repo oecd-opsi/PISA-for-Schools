@@ -107,8 +107,14 @@ function group_field( $group_key ) {
                         <div class="description-tags">
                           <h2>Description tags</h2>
                           <?php echo get_the_term_list( get_the_ID(), 'description-tag' ) ?>
-                          <?php echo get_the_term_list( get_the_ID(), 'additional-description-tag' ) ?>
                         </div>
+
+                        <?php if( get_field( 'post-assessment_learning_additional_tags' ) ) : ?>
+                        <div class="description-tags">
+                          <h2>Additional Description tags</h2>
+                          <?php the_field( 'post-assessment_learning_additional_tags' ) ?>
+                        </div>
+                        <?php endif; ?>
 
                         <div class="case-author">
                           <h2>Case provided by:</h2>

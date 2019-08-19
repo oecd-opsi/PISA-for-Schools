@@ -109,6 +109,10 @@ You're the boss, so have fun editing!
 }/* don't delete this closing bracket */
 
 /* BS Customization */
+h1 {
+	margin: 16px;
+}
+
 .hidden {
 	display: none;
 }
@@ -643,19 +647,25 @@ body:not(.boxed) #bbpress-forums .subheader {
 #case-form {
 	float: left;
 	width: 74%;
+	padding: 0 16px;
+	box-sizing: border-box;
+}
+
+#case-form p {
+	line-height: 1.6;
 }
 
 .case-study-form-widget-area {
 	float: left;
-  width: 26%;
+  width: 20%;
   margin-top: 22px;
-  padding: 15px 12px;
+  padding: 15px 30px;
 	position: relative;
 	z-index: 10;
 }
 
 .case-study-form-widget-area ul {
-	list-style: none;
+	list-style: none !important;
 }
 
 .case-study-form-widget-area ul .step-wrapper {
@@ -666,6 +676,7 @@ body:not(.boxed) #bbpress-forums .subheader {
 	display: block;
   text-align: center;
   font-size: 32px;
+	margin: 5px 0;
 }
 
 .case-study-form-widget-area ul .step-wrapper a {
@@ -673,6 +684,7 @@ body:not(.boxed) #bbpress-forums .subheader {
 	font-size: 1.2em;
 	font-weight: bold;
 	line-height: 1.2;
+	padding: 12px 12px 11px;
 }
 
 .case-study-form-widget-area ul .step-wrapper a::after {

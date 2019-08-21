@@ -93,20 +93,29 @@ function bs_forum_pages($classes) {
   return $classes;
 }
 
-// Redirect to dedicated home page for logged in users
+// Redirect home to forum page for logged in users
 add_action ( 'template_redirect', 'bs_redirect_homepage' );
 function bs_redirect_homepage(){
   if ( is_user_logged_in() && is_front_page() ) {
-    wp_redirect('/logged-in-users-home/') ;
+    wp_redirect('/forum/') ;
     exit();
   }
 }
 
 // Redirect to main forum page after login
-function bs_redirect_after_login() {
-  return '/forum/';
+function bs_redirect_after_login( $redirect_to, $request, $user ) {
+  
+  if ( isset($user->roles) && is_array($user->roles) ) {
+    //check for administrator
+    if ( ! in_array('administrator', $user->roles) ) {
+      // redirect them to another URL, in this case, the homepage
+      $redirect_to =  home_url() . '/forum/';
+    }
+  }
+
+  return $redirect_to;
 }
-add_filter('login_redirect', 'bs_redirect_after_login');
+add_filter('login_redirect', 'bs_redirect_after_login', 10, 3);
 
 /**
 * Redirect buddypress and bbpress pages to registration page
@@ -527,40 +536,40 @@ add_action( 'init', 'bs_case_studies_custom_post_statuses' );
 add_action('admin_footer-post-new.php', 'opsi_append_post_status_list');
 add_action('admin_footer-post.php', 'opsi_append_post_status_list');
 function opsi_append_post_status_list(){
-     global $post;
-     $complete = '';
-     $label = '';
-     if($post->post_type == 'case'){
+  global $post;
+  $complete = '';
+  $label = '';
+  if($post->post_type == 'case'){
 
-		  $complete = '';
-          if($post->post_status == 'pending_deletion'){
-               $complete = ' selected=\'selected\'';
-               $label = '<span id="post-status-display"> '. __('Pending Deletion', 'opsi') .'</span>';
-          }
-		  echo '
-		  <script>
-		  jQuery(document).ready(function($){
-			   $("select#post_status").append("<option value=\'pending_deletion\' '.$complete.'>'. __('Pending Deletion', 'opsi') .'</option>");
-			   $(".misc-pub-section label").append("'.$label.'");
-		  });
-		  </script>
-		  ';
+  $complete = '';
+      if($post->post_status == 'pending_deletion'){
+           $complete = ' selected=\'selected\'';
+           $label = '<span id="post-status-display"> '. __('Pending Deletion', 'opsi') .'</span>';
+      }
+  echo '
+  <script>
+  jQuery(document).ready(function($){
+     $("select#post_status").append("<option value=\'pending_deletion\' '.$complete.'>'. __('Pending Deletion', 'opsi') .'</option>");
+     $(".misc-pub-section label").append("'.$label.'");
+  });
+  </script>
+  ';
 
-		  $complete = '';
-          if($post->post_status == 'reviewed'){
-               $complete = ' selected=\'selected\'';
-               $label = '<span id="post-status-display"> '. __('Reviewed', 'opsi') .'</span>';
-          }
-		  echo '
-		  <script>
-		  jQuery(document).ready(function($){
-			   $("select#post_status").append("<option value=\'reviewed\' '.$complete.'>'. __('Reviewed', 'opsi') .'</option>");
-			   $(".misc-pub-section label").append("'.$label.'");
-		  });
-		  </script>
-		  ';
+  $complete = '';
+      if($post->post_status == 'reviewed'){
+           $complete = ' selected=\'selected\'';
+           $label = '<span id="post-status-display"> '. __('Reviewed', 'opsi') .'</span>';
+      }
+  echo '
+  <script>
+  jQuery(document).ready(function($){
+     $("select#post_status").append("<option value=\'reviewed\' '.$complete.'>'. __('Reviewed', 'opsi') .'</option>");
+     $(".misc-pub-section label").append("'.$label.'");
+  });
+  </script>
+  ';
 
-     }
+  }
 }
 
 function opsi_custom_status_add_in_quick_edit() {

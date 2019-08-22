@@ -117,6 +117,10 @@ h1 {
 	display: none;
 }
 
+.entry-content {
+	padding: 0 30px;
+}
+
 @media screen and (min-width: 481px) {
 	body.left-menu-open #mastlogo #logo img {
 		width: auto;
@@ -258,6 +262,14 @@ body .entry-content #features p {
 	text-align: right;
 }
 
+.footer-credits {
+	line-height: 1.5;
+}
+
+.footer-credits a {
+	text-decoration: underline;
+}
+
 @media screen and (max-width: 822px) {
 	.caption-wrap .caption .slide-heading {
 		font-size: 24px;
@@ -291,6 +303,108 @@ body.role-administrator .bp-courses-nav,
 body.role-instructor .bp-courses-nav,
 body.role-student .bp-courses-nav {
 	display: list-item;
+}
+
+#bbp-forum-1781 .bbp-forums-list li {
+	display: block;
+	font-size: 14px;
+}
+
+#bbp-forum-1781 .bbp-forums-list li a[href*="andorra"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/AD.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="brazil"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/BR.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="brunei"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/BN.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="china"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/CH.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="colombia"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/CO.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="japan"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/JP.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="mexico"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/ME.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="russian"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/RU.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="spain"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/ES.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="arab"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/AE.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="kingdom"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/GB.png) no-repeat center;
+	background-size: cover;
+}
+#bbp-forum-1781 .bbp-forums-list li a[href*="states"]::before {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	background: url(../images/flags/US.png) no-repeat center;
+	background-size: cover;
 }
 
 .bbp-forum-details .table-cell {
@@ -948,4 +1062,32 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .single-case .side-column .case-author .button i {
 	margin-left: 4px;
+}
+
+.anr_captcha_field_div > div {
+	margin: 0 auto;
+}
+
+#tandc-checkbox,
+#tandc-checkbox-container {
+	border-bottom: none !important;
+}
+
+/* Log In Page */
+#post-2425 {
+	max-width: 860px;
+	margin: auto;
+}
+
+#post-2425 .anr_captcha_field_div > div {
+  margin: 0;
+}
+
+.bp-docs-container {
+	background: #fff;
+	padding: 30px;
+}
+
+.bp-docs-container .item-list-tabs li a {
+	padding: 10px !important;
 }

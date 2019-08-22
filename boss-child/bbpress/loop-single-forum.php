@@ -41,7 +41,15 @@
 
 		<?php do_action( 'bbp_theme_before_forum_sub_forums' ); ?>
 
-		<?php bbp_list_forums(); ?>
+		<?php
+		if ( 1781 === bbp_get_forum_id() ) {
+			bbp_list_forums( array(
+				'separator' => '',
+			) );
+		} else {
+			bbp_list_forums();
+		}
+		?>
 
 		<?php do_action( 'bbp_theme_after_forum_sub_forums' ); ?>
 

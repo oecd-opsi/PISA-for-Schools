@@ -102,14 +102,23 @@ function bs_redirect_homepage(){
   }
 }
 
+// Redirect not logged users to home if trying to access a private page
+add_action ( 'template_redirect', 'bs_redirect_visitors_to_homepage' );
+function bs_redirect_visitors_to_homepage(){
+  if ( ! is_user_logged_in() && ! is_front_page() && ! is_page( array( 2425, 1387, 2422, 2419, 1690, 1653 ) ) ) {
+    wp_redirect( home_url() ) ;
+    exit();
+  }
+}
+
 // Redirect to main forum page after login
 function bs_redirect_after_login( $redirect_to, $request, $user ) {
-  
+
   if ( isset($user->roles) && is_array($user->roles) ) {
     //check for administrator
     if ( ! in_array('administrator', $user->roles) ) {
       // redirect them to another URL, in this case, the homepage
-      $redirect_to =  home_url() . '/forum/';
+      $redirect_to =  home_url( '/forum/' );
     }
   }
 
@@ -120,28 +129,28 @@ add_filter('login_redirect', 'bs_redirect_after_login', 10, 3);
 /**
 * Redirect buddypress and bbpress pages to registration page
 */
-function bs_page_template_redirect_for_not_logged_in_users()
-{
-  //if not logged in and on a bp page except registration or activation
-  if( ! is_user_logged_in() &&
-    ( ( ! bp_is_blog_page() && ! bp_is_activation_page() && ! bp_is_register_page() ) || is_bbpress() )
-  )
-  {
-    wp_redirect( home_url( '/register/' ) );
-    exit();
-  }
-}
-add_action( 'template_redirect', 'bs_page_template_redirect_for_not_logged_in_users' );
-
-// Redirect to custom login page
-// add_action('init','bs_custom_login');
-// function bs_custom_login(){
-//   global $pagenow;
-//   if( 'wp-login.php' == $pagenow && ! is_user_logged_in() ) {
-//     wp_redirect('/login/');
+// function bs_page_template_redirect_for_not_logged_in_users()
+// {
+//   //if not logged in and on a bp page except registration or activation
+//   if( ! is_user_logged_in() &&
+//     ( ( ! bp_is_blog_page() && ! bp_is_activation_page() && ! bp_is_register_page() ) || is_bbpress() )
+//   )
+//   {
+//     wp_redirect( home_url( '/register/' ) );
 //     exit();
 //   }
 // }
+// add_action( 'template_redirect', 'bs_page_template_redirect_for_not_logged_in_users' );
+
+// Redirect to custom login page
+add_action('init','bs_custom_login');
+function bs_custom_login(){
+  global $pagenow;
+  if( 'wp-login.php' == $pagenow && ! is_user_logged_in() ) {
+    wp_redirect( home_url( '/login/' ) );
+    exit();
+  }
+}
 
 //* Add buttons in forum details area to sort topics and tag selector to filter topics
 function bs_add_sort_btns( $forum_id ) {
@@ -201,7 +210,7 @@ add_filter( 'bbp_activity_topic_create', 'bs_activity_topic_text_for_poll', 40, 
 function bs_minify_sidenav() {
 
   // if ( ! is_admin() &&  ! bp_is_home() && ( is_bbpress() || is_page( 1657 ) || is_page( 2198 ) ) ) {
-  if ( ! is_admin() &&  ! bp_is_home() ) {
+  if ( ! is_admin() &&  ! bp_is_home() && is_user_logged_in() ) {
     echo '<script>document.addEventListener( "DOMContentLoaded", function(){ document.querySelector("body").classList.remove("left-menu-open"); } );</script>';
   }
 

@@ -126,21 +126,19 @@ function bs_redirect_after_login( $redirect_to, $request, $user ) {
 }
 add_filter('login_redirect', 'bs_redirect_after_login', 10, 3);
 
-/**
-* Redirect buddypress and bbpress pages to registration page
-*/
-// function bs_page_template_redirect_for_not_logged_in_users()
-// {
-//   //if not logged in and on a bp page except registration or activation
-//   if( ! is_user_logged_in() &&
-//     ( ( ! bp_is_blog_page() && ! bp_is_activation_page() && ! bp_is_register_page() ) || is_bbpress() )
-//   )
-//   {
-//     wp_redirect( home_url( '/register/' ) );
-//     exit();
-//   }
-// }
-// add_action( 'template_redirect', 'bs_page_template_redirect_for_not_logged_in_users' );
+// Redirect logged users from registration/login pages to forum
+add_action('template_redirect','bs_redirect_logged_user');
+function bs_redirect_logged_user(){
+  $user = wp_get_current_user();
+  if ( is_user_logged_in() && is_page( array( 2425, 1387 ) ) ) {
+    if ( in_array( 'administrator', $user->roles ) ) {
+      wp_redirect( home_url( '/wp-admin/' ) );
+    } else {
+      wp_redirect( home_url( '/forum/' ) );
+    }
+    exit();
+  }
+}
 
 // Redirect to custom login page
 add_action('init','bs_custom_login');
@@ -236,7 +234,7 @@ function custom_bbpress_recent_replies_by_topic($atts){
     $post_types[] = 'topic';
   }
 
-  // get the 5 topics with the most recent replie
+  // get the 5 topics with the most recent replies
   $args = array(
     'posts_per_page' => $show,
     'post_type' => array('topic'),
@@ -299,16 +297,16 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
 
   // get the excerpt
   $excerpt = get_the_excerpt();
-  $excerpt = substr( $title, 0, 136); // trim excerpt to specific number of characters (55 characters)
+  $excerpt = substr( $title, 0, 136); // trim excerpt to specific number of characters (136 characters)
 
   // determine if odd or even row
   $row_class = ($row_number % 2) ? 'odd' : 'even';
   ?>
     <li class="bbpress-recent-reply-row <?php print $row_class; ?>">
-      <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div>
-      <!-- <div>Avatar linked to bbPress Profile:<a href="<?php //print esc_url( bbp_get_user_profile_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php //print get_avatar( get_the_author_meta( 'ID' ) ); ?></a></div> -->
+      <!-- <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div> -->
+      <div class="recent-replies-avatar"><a href="<?php echo esc_url( bbp_get_user_profile_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></a></div>
       <div class="recent-replies-body">
-        <div class="recent-replies-author"><?php the_author(); ?></div>
+        <div class="recent-replies-author"><a href="<?php echo esc_url( bbp_get_user_profile_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author(); ?></a></div>
         <div class="recent-replies-title"><?php echo $title; ?></div>
         <div class="recent-replies-excerpt"><?php echo $excerpt; ?></div>
       </div>
@@ -702,3 +700,21 @@ function bs_submission_date( $post ) {
   update_field( 'submission_date', $now, $post->ID );
 
 }
+
+// Automatically add user to their country group
+function add_user_to_country_group( $user_id, $role, $old_roles ) {
+
+  if( !$user_id ) return false;
+  // get country field value
+  $country = xprofile_get_field_data( 15, $user_id );
+  // slugify country name
+  $country_slug = strtolower( str_replace( " ", "-", $country ) );
+  // get group ID by slug
+  $group_id = BP_Groups_Group::group_exists( $country_slug );
+  // add user to group
+  if ( $group_id ) {
+    groups_accept_invite( $user_id, $group_id );
+  }
+
+}
+add_action( 'set_user_role', 'add_user_to_country_group', 10, 3 );

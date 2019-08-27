@@ -339,7 +339,7 @@ body.role-student .bp-courses-nav {
 	display: inline-block;
 	width: 22px;
 	height: 14px;
-	background: url(../images/flags/CH.png) no-repeat center;
+	background: url(../images/flags/CN.png) no-repeat center;
 	background-size: cover;
 }
 #bbp-forum-1781 .bbp-forums-list li a[href*="colombia"]::before {
@@ -363,7 +363,7 @@ body.role-student .bp-courses-nav {
 	display: inline-block;
 	width: 22px;
 	height: 14px;
-	background: url(../images/flags/ME.png) no-repeat center;
+	background: url(../images/flags/MX.png) no-repeat center;
 	background-size: cover;
 }
 #bbp-forum-1781 .bbp-forums-list li a[href*="russian"]::before {
@@ -662,6 +662,7 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .type-forum .entry-title {
 	padding: 14px 20px;
+	display: none;
 }
 
 .bbp-forum-breadcrumb {

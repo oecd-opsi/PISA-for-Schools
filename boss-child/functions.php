@@ -718,3 +718,25 @@ function add_user_to_country_group( $user_id, $role, $old_roles ) {
 
 }
 add_action( 'set_user_role', 'add_user_to_country_group', 10, 3 );
+
+// Enable visual editor in bbPress
+function bbp_enable_visual_editor( $args = array() ) {
+  $args['tinymce'] = true;
+  $args['quicktags'] = false;
+  return $args;
+}
+add_filter( 'bbp_after_get_the_content_parse_args', 'bbp_enable_visual_editor' );
+
+// Enable mention autocomplete in bbPress
+function buddydev_enable_mention_autosuggestions_on_compose( $load, $mentions_enabled ) {
+	if ( ! $mentions_enabled ) {
+		return $load; //activity mention is  not enabled, so no need to bother
+	}
+	//modify this condition to suit yours
+	if( is_user_logged_in() ) {
+		$load = true;
+	}
+
+	return $load;
+}
+add_filter( 'bp_activity_maybe_load_mentions_scripts', 'buddydev_enable_mention_autosuggestions_on_compose', 10, 2 );

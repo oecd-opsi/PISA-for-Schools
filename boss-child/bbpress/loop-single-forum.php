@@ -45,9 +45,14 @@
 		if ( 1781 === bbp_get_forum_id() ) {
 			bbp_list_forums( array(
 				'separator' => '',
+				'show_topic_count' => false,
+        'show_reply_count' => false,
 			) );
 		} else {
-			bbp_list_forums();
+			bbp_list_forums(array(
+				'show_topic_count' => false,
+        'show_reply_count' => false,
+			));
 		}
 		?>
 

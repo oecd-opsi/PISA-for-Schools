@@ -740,3 +740,23 @@ function buddydev_enable_mention_autosuggestions_on_compose( $load, $mentions_en
 	return $load;
 }
 add_filter( 'bp_activity_maybe_load_mentions_scripts', 'buddydev_enable_mention_autosuggestions_on_compose', 10, 2 );
+
+// Disallow user to edit role profile field after submission
+function bs_hide_profile_edit( $retval ) {
+	// remove field from edit tab
+	if(  bp_is_profile_edit() ) {
+		$retval['exclude_fields'] = '6'; // ID's separated by comma
+	}
+	// allow field on registration page
+	if ( bp_is_register_page() ) {
+		$retval['include_fields'] = '6'; // ID's separated by comma
+	}
+
+	// hide the filed on profile view tab
+	// if ( $data = bp_get_profile_field_data( 'field=6' ) ) :
+	// 	$retval['exclude_fields'] = '6'; // ID's separated by comma
+	// endif;
+
+	return $retval;
+}
+add_filter( 'bp_after_has_profile_parse_args', 'bs_hide_profile_edit' );

@@ -1091,3 +1091,7 @@ body:not(.boxed) #bbpress-forums .subheader {
 .bp-docs-container .item-list-tabs li a {
 	padding: 10px !important;
 }
+
+.bb-cover-photo .holder {
+	background-size: contain;
+}

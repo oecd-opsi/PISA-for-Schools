@@ -105,7 +105,7 @@ function bs_redirect_homepage(){
 // Redirect not logged users to home if trying to access a private page
 add_action ( 'template_redirect', 'bs_redirect_visitors_to_homepage' );
 function bs_redirect_visitors_to_homepage(){
-  if ( !is_user_logged_in() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) && !is_front_page() && !is_page( array( 2425, 1387, 2422, 2419, 1690, 1653 ) ) ) {
+  if ( !is_user_logged_in() && !is_front_page() && !is_page( array( 2425, 1387, 2422, 2419, 1690, 1653, 2507 ) ) && ! is_post_type_archive( 'bp_doc' ) ) {
     wp_redirect( home_url() ) ;
     exit();
   }
@@ -130,7 +130,7 @@ add_filter('login_redirect', 'bs_redirect_after_login', 10, 3);
 add_action('template_redirect','bs_redirect_logged_user');
 function bs_redirect_logged_user(){
   $user = wp_get_current_user();
-  if ( is_user_logged_in() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) && is_page( array( 2425, 1387 ) ) ) {
+  if ( is_user_logged_in() && is_page( array( 2425, 1387 ) ) ) {
     if ( in_array( 'administrator', $user->roles ) ) {
       wp_redirect( home_url( '/wp-admin/' ) );
     } else {

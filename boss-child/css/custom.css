@@ -169,21 +169,26 @@ body.logged-out #inner-wrap {
 .metaslider .slides,
 .metaslider .slides > li,
 .metaslider .slides > li > img  {
-	height: 350px;
+	height: 500px;
 	object-fit: cover;
 	object-position: center;
 }
 
-.caption-wrap,
-.caption-wrap .caption {
-	height: 100%;
+.caption-wrap {
+	top: 50% !important;
+  transform: translateY(-50%);
+  bottom: auto !important;
+  padding: 60px 136px;
+  box-sizing: border-box;
+  font-size: 28px;
+	font-weight: bold;
 }
 
 .caption-wrap .caption {
-	display: flex;
+	/* display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
+	flex-direction: column; */
 }
 
 .caption-wrap .caption img {
@@ -1094,4 +1099,43 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .bb-cover-photo .holder {
 	background-size: contain;
+}
+
+.infog-number {
+	text-align: center !important;
+  font-size: 50px;
+  color: #C6DA50;
+  margin-bottom: 0 !important;
+  line-height: 1 !important;
+}
+
+.infog-number-desc {
+	text-align: center !important;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
+}
+
+.infog-item-desc {
+	text-align: center !important;
+	font-size: 14px;
+	color: #fff;
+}
+
+#learnmore-infographic-1 .vc_column-inner,
+#learnmore-infographic-2 .vc_column-inner,
+#how-to-join-title-wrapper .vc_column-inner {
+	padding-top: 0;
+}
+
+.how-to-join-title {
+	background: #C6DA50;
+	max-width: 536px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-transform: uppercase;
+	padding: 30px 0;
+	line-height: 1.1;
+	margin-top: 0 !important;
 }

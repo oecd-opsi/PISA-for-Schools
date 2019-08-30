@@ -66,7 +66,7 @@ add_action ( 'template_redirect', 'bs_show_courses_to_students_instructors', 1);
 function bs_disable_dashboard() {
 
 	// if user is not logged in and in not admin area return
-	if ( ! is_user_logged_in() && ! is_admin() )
+	if ( ! is_user_logged_in() && ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) )
 		return;
 
 	$user = wp_get_current_user();

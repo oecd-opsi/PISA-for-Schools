@@ -117,6 +117,10 @@ h1 {
 	display: none;
 }
 
+input {
+	margin-bottom: 30px;
+}
+
 .entry-content {
 	padding: 0 30px;
 }
@@ -149,6 +153,10 @@ body.logged-out #mobile-header {
 body.logged-out #right-panel,
 body.logged-out #inner-wrap {
 	margin-top: 0 !important;
+}
+
+body.logged-out #menu-item-2445 {
+	display: none;
 }
 
 .header-inner,
@@ -1138,4 +1146,13 @@ body:not(.boxed) #bbpress-forums .subheader {
 	padding: 30px 0;
 	line-height: 1.1;
 	margin-top: 0 !important;
+}
+
+.registration .field-visibility-settings-toggle,
+.registration .field-visibility-settings-notoggle {
+	display: none;
+}
+
+#members-group_leader, #members-student, .item-list-tabs .hideshow {
+	display: none !important;
 }

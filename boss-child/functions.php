@@ -773,3 +773,62 @@ function bs_hide_profile_edit( $retval ) {
 	return $retval;
 }
 add_filter( 'bp_after_has_profile_parse_args', 'bs_hide_profile_edit' );
+
+// Add country and school name as users admin columns
+function bs_modify_user_table( $columns ) {
+	return array_merge( $columns,
+            array(
+							'school' => __('School'),
+							'country' => __('Country'),
+						 )
+				  );
+}
+add_filter( 'manage_users_columns', 'bs_modify_user_table' );
+
+function bs_modify_user_table_row( $value, $column_name, $user_id ) {
+  switch ($column_name) {
+    case 'school' :
+      return bp_get_profile_field_data (
+        array(
+          'field' => 10,
+          'user_id' => $user_id,
+        )
+      );
+      break;
+    case 'country' :
+      return bp_get_profile_field_data (
+        array(
+          'field' => 15,
+          'user_id' => $user_id,
+        )
+      );
+      break;
+    default:
+  }
+  return $value;
+}
+add_filter( 'manage_users_custom_column', 'bs_modify_user_table_row', 10, 3 );
+
+// Add country and school name as users admin columns in Manage signups page
+function bs_modify_user_columns($column_headers) {
+
+  $column_headers['school'] = __('School');
+  $column_headers['country'] = __('Country');
+
+  return $column_headers;
+}
+add_action('manage_users_page_bp-signups_columns','bs_modify_user_columns');
+
+function bs_signup_custom_column( $str, $column_name, $signup_object ) {
+  switch ($column_name) {
+    case 'school' :
+      return $signup_object->meta['field_10'];
+      break;
+    case 'country' :
+      return $signup_object->meta['field_15'];
+      break;
+    default:
+  }
+  return $str;
+}
+add_filter( 'bp_members_signup_custom_column', 'bs_signup_custom_column', 1, 3 );

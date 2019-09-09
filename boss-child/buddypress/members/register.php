@@ -390,7 +390,7 @@
 
 			<div id="template-notices" role="alert" aria-atomic="true">
 				<?php if ( bp_registration_needs_activation() ) : ?>
-					<p><?php _e( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'buddypress' ); ?></p>
+					<p><?php _e( 'Thank you for registering to join the community. We will contact you by email as soon as your registration is approved.', 'buddypress' ); ?></p>
 				<?php else : ?>
 					<p><?php _e( 'You have successfully created your account! Please log in using the username and password you have just created.', 'buddypress' ); ?></p>
 				<?php endif; ?>

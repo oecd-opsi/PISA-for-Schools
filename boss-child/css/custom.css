@@ -155,7 +155,8 @@ body.logged-out #inner-wrap {
 	margin-top: 0 !important;
 }
 
-body.logged-out #menu-item-2445 {
+body.logged-out #menu-item-2445,
+body.logged-out #menu-item-2502 {
 	display: none;
 }
 
@@ -1111,10 +1112,11 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .infog-number {
 	text-align: center !important;
-  font-size: 50px;
+  font-size: 46px;
   color: #C6DA50;
   margin-bottom: 0 !important;
   line-height: 1 !important;
+  white-space: nowrap;
 }
 
 .infog-number-desc {

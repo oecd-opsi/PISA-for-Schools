@@ -614,13 +614,13 @@ body:not(.boxed) #bbpress-forums .subheader {
 	content: url('../images/green-hexagon.svg');
 }
 
-#bbp-forum-2003 .bbp-forum-title,
-#bbp-forum-2003 .bbp-forum-topic-count,
-#bbp-forum-2003 .bbp-forum-reply-count,
-#post-2003 .entry-title {
+#bbp-forum-1997 .bbp-forum-title,
+#bbp-forum-1997 .bbp-forum-topic-count,
+#bbp-forum-1997 .bbp-forum-reply-count,
+#post-1997 .entry-title {
 	background: rgba( 0, 174, 136, .23);
 }
-#bbp-forum-2003 .bbp-forum-title::before {
+#bbp-forum-1997 .bbp-forum-title::before {
 	content: url('../images/green2-hexagon.svg');
 }
 

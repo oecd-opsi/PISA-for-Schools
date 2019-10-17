@@ -109,6 +109,19 @@ You're the boss, so have fun editing!
 }/* don't delete this closing bracket */
 
 /* BS Customization */
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
 h1 {
 	margin: 16px;
 }
@@ -138,11 +151,6 @@ input {
 
 body.is-desktop.left-menu-open[data-logo="1"] #left-panel-inner {
 	padding-top: 134px !important;
-}
-
-body.logged-out.home-page #masthead,
-body.logged-out.home-page #mobile-header {
-	display: none;
 }
 
 body.logged-out #masthead,
@@ -1151,8 +1159,18 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .registration .field-visibility-settings-toggle,
-.registration .field-visibility-settings-notoggle {
+.registration .field-visibility-settings-notoggle,
+.registration #titlebar-search,
+.registration a.register {
 	display: none;
+}
+
+.required-note {
+	color: #D04432;
+}
+.required-note-legend {
+	margin-top: 1em !important;
+	text-align: right;
 }
 
 #members-group_leader, #members-student, .item-list-tabs .hideshow {

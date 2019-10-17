@@ -67,6 +67,11 @@ function boss_child_theme_scripts_styles()
     wp_enqueue_script( 'jvectormap-worldmap-script', get_stylesheet_directory_uri() . '/js/jquery-jvectormap-world-mill.js', 'jquery', '1.0.0', false );
   }
 
+  // Country phone prefix script for register page
+  if ( is_page( 'register' ) ) {
+    wp_enqueue_script( 'country-prefixes', get_stylesheet_directory_uri() . '/js/country-prefixes.js', 'jquery', '1.0.0', false );
+  }
+
 }
 add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
 
@@ -832,3 +837,21 @@ function bs_signup_custom_column( $str, $column_name, $signup_object ) {
   return $str;
 }
 add_filter( 'bp_members_signup_custom_column', 'bs_signup_custom_column', 1, 3 );
+
+// Disable activation email
+function disable_activation_email() {
+  return false;
+}
+add_filter( 'bp_core_signup_send_activation_key', 'disable_activation_email' );
+
+// Disable tinyMCE in registration page
+function bs_remove_rich_text_registration_fields( $field_id = null ) {
+    if ( ! $field_id ) {
+      $field_id = bp_get_the_profile_field_id( '5' );
+    }
+    $field = xprofile_get_field( $field_id );
+    if ( $field ) {
+      $enabled = false;
+    }
+}
+add_filter( 'bp_xprofile_is_richtext_enabled_for_field', 'bs_remove_rich_text_registration_fields' );

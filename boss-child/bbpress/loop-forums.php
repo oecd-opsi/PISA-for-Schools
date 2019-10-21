@@ -11,6 +11,8 @@
 
 <?php do_action( 'bbp_template_before_forums_loop' ); ?>
 
+<p class="subheader">This is the community homepage with clickable links that will open to the discussions.</p>
+
 <ul id="forums-list-<?php bbp_forum_id(); ?>" class="bbp-forums">
 
 	<li class="bbp-header">
@@ -19,7 +21,7 @@
 			<li class="bbp-forum-info"><?php _e( 'Category', 'bbpress' ); ?></li>
 			<li class="bbp-forum-topic-count"><?php _e( 'Topics', 'bbpress' ); ?></li>
 			<li class="bbp-forum-reply-count"><?php bbp_show_lead_topic() ? _e( 'Replies', 'bbpress' ) : _e( 'Posts', 'bbpress' ); ?></li>
-			<li class="bbp-forum-freshness"><?php _e( 'Latest', 'bbpress' ); ?></li>
+			<li class="bbp-forum-freshness"><?php _e( 'Latest posts', 'bbpress' ); ?></li>
 		</ul>
 
 	</li><!-- .bbp-header -->

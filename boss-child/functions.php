@@ -213,7 +213,7 @@ add_filter( 'bbp_activity_topic_create', 'bs_activity_topic_text_for_poll', 40, 
 function bs_minify_sidenav() {
 
   // if ( ! is_admin() &&  ! bp_is_home() && ( is_bbpress() || is_page( 1657 ) || is_page( 2198 ) ) ) {
-  if ( ! is_admin() &&  ! bp_is_home() && is_user_logged_in() ) {
+  if ( ! is_admin() && ! bp_is_home() && ! is_bbpress() && ! is_page( 1657 ) && is_user_logged_in() ) {
     echo '<script>document.addEventListener( "DOMContentLoaded", function(){ document.querySelector("body").classList.remove("left-menu-open"); } );</script>';
   }
 
@@ -304,16 +304,24 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
   $excerpt = get_the_excerpt();
   $excerpt = substr( $title, 0, 136); // trim excerpt to specific number of characters (136 characters)
 
+  // get belonging forum
+  $parent = array_reverse( get_post_ancestors( get_the_ID()) );
+  $first_parent = get_page( $parent[0] );
+  $parent_forum_ID = apply_filters('the_ID', $first_parent->ID);
+  $parent_forum_title = bbp_get_forum_title( $parent_forum_ID );
+  $parent_forum_url = bbp_get_forum_permalink( $parent_forum_ID );
+
   // determine if odd or even row
   $row_class = ($row_number % 2) ? 'odd' : 'even';
   ?>
     <li class="bbpress-recent-reply-row <?php print $row_class; ?>">
       <!-- <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div> -->
-      <div class="recent-replies-avatar"><a href="<?php echo esc_url( bbp_get_user_profile_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></a></div>
+      <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div>
       <div class="recent-replies-body">
-        <div class="recent-replies-author"><a href="<?php echo esc_url( bbp_get_user_profile_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author(); ?></a></div>
-        <div class="recent-replies-title"><?php echo $title; ?></div>
+        <div class="recent-replies-author"><?php the_author(); ?></div>
+        <div class="recent-replies-title"><a href="<?php the_permalink(); ?>"><?php echo $title; ?></a></div>
         <div class="recent-replies-excerpt"><?php echo $excerpt; ?></div>
+        <div class="recent-replies-forum"><a href="<?php echo $parent_forum_url ?>">In <?php echo $parent_forum_title ?></a></div>
       </div>
       <!-- <div>Link To Reply: <a href="<?php //the_permalink(); ?>">view reply</a></div> -->
       <!-- <div>Link To Topic#Reply: <a href="<?php //print get_permalink( get_post_meta( get_the_ID(), '_bbp_topic_id', true) ); ?>#post-<?php //the_ID(); ?>">view reply</a></div> -->

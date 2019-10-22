@@ -1195,3 +1195,7 @@ body:not(.boxed) #bbpress-forums .subheader {
 #members-group_leader, #members-student, .item-list-tabs .hideshow {
 	display: none !important;
 }
+
+input.bpmts-feedback-form-submit-button {
+  width: 100px;
+}

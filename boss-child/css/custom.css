@@ -164,8 +164,13 @@ body.logged-out #inner-wrap {
 }
 
 body.logged-out #menu-item-2445,
-body.logged-out #menu-item-2502 {
+body.logged-out #menu-item-2502,
+body.logged-in #menu-item-2636 {
 	display: none;
+}
+
+#menu-buddypanel-pisa #menu-item-2658 a::before {
+  content: "\f500" !important;
 }
 
 .header-inner,
@@ -180,6 +185,10 @@ body.logged-out #menu-item-2502 {
 
 .home-page header.entry-header {
 	display: none;
+}
+
+.header-inner .left-col a {
+  color: #fff;
 }
 
 /* Home slider */
@@ -308,17 +317,13 @@ body .entry-content #features p {
 
 #gtranslate_selector {
 	background: rgba(255,255,255,.1);
-  color: #999;
+  color: #fff;
   line-height: 1;
   font-weight: 600;
   font-size: 16px;
   border: none;
   text-transform: unset;
   font-family: Rubik;
-}
-
-.bp-courses-nav {
-	display: none;
 }
 
 body.role-administrator .bp-courses-nav,
@@ -1198,4 +1203,9 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 input.bpmts-feedback-form-submit-button {
   width: 100px;
+}
+
+.bs-reply-btn-wrapper,
+.wpulike {
+  display: inline-block;
 }

@@ -863,3 +863,10 @@ function bs_remove_rich_text_registration_fields( $field_id = null ) {
     }
 }
 add_filter( 'bp_xprofile_is_richtext_enabled_for_field', 'bs_remove_rich_text_registration_fields' );
+
+// Add reply button after post in forum
+// add_action( 'bbp_theme_after_topic_content', 'bs_reply_button' );
+add_filter( 'bbp_get_reply_content', 'bs_reply_button', 91 );
+function bs_reply_button( $content ) {
+  echo $content . '<div class="bs-reply-btn-wrapper"><a href="#new-post" class="button">Reply</a></div>';
+}

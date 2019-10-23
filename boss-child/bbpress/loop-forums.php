@@ -11,7 +11,6 @@
 
 <?php do_action( 'bbp_template_before_forums_loop' ); ?>
 
-<p class="subheader">This is the community homepage with clickable links that will open to the discussions.</p>
 
 <ul id="forums-list-<?php bbp_forum_id(); ?>" class="bbp-forums">
 
@@ -25,6 +24,7 @@
 		</ul>
 
 	</li><!-- .bbp-header -->
+	<p class="subheader">This is the community homepage with clickable links that will open to the discussions.</p>
 
 	<li class="bbp-body">
 

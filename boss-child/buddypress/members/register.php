@@ -65,7 +65,7 @@
 
 			</div>
 
-			<p><?php _e( 'If your school participates in the PISA for Schools project, fill in the fields below, and we\'ll get an account set up for you as soon as possible.', 'buddypress' ); ?></p>
+			<p><?php _e( 'If your school <a href="https://www.oecd.org/PISA/pisa-for-schools/">participates in the PISA for Schools project</a>, fill in the fields below, and we\'ll get an account set up for you as soon as possible.', 'buddypress' ); ?></p>
 
 			<?php
 
@@ -82,7 +82,7 @@
 
 				<h2><?php _e( 'Account Details', 'buddypress' ); ?></h2>
 
-				<label for="signup_username"><?php _e( 'Username - as will appear in the commmunity', 'buddypress' ); ?> <?php _e( '<span class="required-note">*<span class="screen-reader-text"> required</span></span>', 'buddypress' ); ?></label>
+				<label for="signup_username"><?php _e( 'Username - as will appear in the community', 'buddypress' ); ?> <?php _e( '<span class="required-note">*<span class="screen-reader-text"> required</span></span>', 'buddypress' ); ?></label>
 				<?php
 
 				/**

@@ -23,7 +23,9 @@
 
         <div class="bbp-topic-details">
             <div class="table-cell">
-                <?php bbp_topic_tag_list(); ?>
+                <?php bbp_topic_tag_list( bbp_get_topic_id(), array(
+									'sep' => ' ',
+								)); ?>
             </div>
             <?php buddyboss_bbp_single_topic_description(array('before'=>'<div class="bbp-forum-data">', 'after'=>'</div>')); ?>
         </div>

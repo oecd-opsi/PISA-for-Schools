@@ -297,12 +297,12 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
 
   // get the reply title
   $title = get_the_title();
-  $title = substr( $title, 0, 55); // trim title to specific number of characters (55 characters)
-  $title = wp_trim_words( $title, 5, '...'); // trim title to specific number of words (5 words)...
+  // $title = substr( $title, 0, 55); // trim title to specific number of characters (55 characters)
+  // $title = wp_trim_words( $title, 5, '...'); // trim title to specific number of words (5 words)...
 
   // get the excerpt
   $excerpt = get_the_excerpt();
-  $excerpt = substr( $title, 0, 136); // trim excerpt to specific number of characters (136 characters)
+  $excerpt = substr( $excerpt, 0, 80); // trim excerpt to specific number of characters (136 characters)
 
   // get belonging forum
   $parent = array_reverse( get_post_ancestors( get_the_ID()) );
@@ -315,12 +315,11 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
   $row_class = ($row_number % 2) ? 'odd' : 'even';
   ?>
     <li class="bbpress-recent-reply-row <?php print $row_class; ?>">
-      <!-- <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div> -->
-      <div class="recent-replies-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div>
+      <!-- <div class="recent-replies-avatar"><?php // echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div> -->
       <div class="recent-replies-body">
         <div class="recent-replies-author"><?php the_author(); ?></div>
         <div class="recent-replies-title"><a href="<?php the_permalink(); ?>"><?php echo $title; ?></a></div>
-        <div class="recent-replies-excerpt"><?php echo $excerpt; ?></div>
+        <div class="recent-replies-excerpt"><?php echo $excerpt; ?>...</div>
         <div class="recent-replies-forum"><a href="<?php echo $parent_forum_url ?>">In <?php echo $parent_forum_title ?></a></div>
       </div>
       <!-- <div>Link To Reply: <a href="<?php //the_permalink(); ?>">view reply</a></div> -->
@@ -865,8 +864,45 @@ function bs_remove_rich_text_registration_fields( $field_id = null ) {
 add_filter( 'bp_xprofile_is_richtext_enabled_for_field', 'bs_remove_rich_text_registration_fields' );
 
 // Add reply button after post in forum
-// add_action( 'bbp_theme_after_topic_content', 'bs_reply_button' );
 add_filter( 'bbp_get_reply_content', 'bs_reply_button', 91 );
 function bs_reply_button( $content ) {
   echo $content . '<div class="bs-reply-btn-wrapper"><a href="#new-post" class="button">Reply</a></div>';
 }
+
+// Case study status shortcode
+function bs_casestudystatus( $output = '', $atts, $instance ) {
+
+
+	$atts = shortcode_atts( array(
+		'id'         => ( ( isset( $_GET['edit'] ) && intval( $_GET['edit'] ) > 0 ) ? intval( $_GET['edit'] ) : 0 ),
+	), $atts, 'case-study-status' );
+
+
+	if ( $atts['id'] == 0 ) {
+		return '<h3 class="status_header">'. __( 'Status', 'bs_pisa' ) .'</h3>'.__( 'Not yet saved', 'bs_pisa' );
+	}
+	if ( isset( $_GET['edit'] ) && intval( $_GET['edit'] ) > 0 && !can_edit_acf_form( intval( $_GET['edit'] ) ) ) {
+		return;
+	}
+
+	$post_status = get_post_status_object ( get_post_status( $atts['id'] ) );
+
+	$status = $post_status->label;
+
+	if ( !$post_status->name ) {
+		return '<h3 class="status_header">'. __( 'Status', 'bs_pisa' ) .'</h3>'.__( 'Not yet submitted', 'bs_pisa' );
+	}
+
+	$last_save = get_the_modified_date( get_option('date_format') .', '. get_option('time_format'). ' a', $atts['id'] );
+
+	if ( $post_status ) {
+		$return = '<h3 class="status_header">'. __( 'Status', 'bs_pisa' ) .'</h3><p>'.$status .'<br />'. __( 'Last saved:', 'bs_pisa' ) .' '. $last_save .'</p>';
+    if( $post_status = 'draft') {
+      $return .= '<a href="/?post_type=case&p=' . $atts['id'] . '">Preview this case study</a>';
+    }
+    return $return;
+	}
+
+	return;
+}
+add_shortcode( 'case-study-status', 'bs_casestudystatus', 100, 3 );

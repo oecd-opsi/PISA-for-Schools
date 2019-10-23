@@ -130,6 +130,10 @@ h1 {
 	display: none;
 }
 
+#group-description .group-name, .author.archive .archive-header .archive-title a:hover, .entry-buddypress-content #group-create-body h4, .bb-add-label-button, .boss-modal-form a, .bb-message-tools > a, .learndash-pager a:hover, .bb-message-tools a.bbm-label-button, .widget_buddyboss_recent_post h3 a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, a:hover {
+  color: #d04432 !important;
+}
+
 input {
 	margin-bottom: 30px;
 }
@@ -324,6 +328,10 @@ body .entry-content #features p {
   border: none;
   text-transform: unset;
   font-family: Rubik;
+}
+
+#gtranslate_selector option {
+  color: #333;
 }
 
 body.role-administrator .bp-courses-nav,
@@ -528,6 +536,15 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 @media screen and (min-width: 960px) {
 
+  #post-1657 {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  #post-1657 .entry-content {
+    padding: 0;
+  }
+
 	#post-1657 li.bbp-body {
 		margin: 0;
 		padding: 0 70px 0 0;
@@ -549,12 +566,12 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 }
 
-.page-id-1657 .bbp-forum-info {
+#post-1657 .forum-titles .bbp-forum-info {
   width: 43%;
 }
 
-.page-id-1657 .bbp-forum-topic-count,
-.page-id-1657 .bbp-forum-reply-count {
+#post-1657 .forum-titles .bbp-forum-topic-count,
+#post-1657 .forum-titles .bbp-forum-reply-count {
   width: 13.2%;
 }
 
@@ -1208,4 +1225,15 @@ input.bpmts-feedback-form-submit-button {
 .bs-reply-btn-wrapper,
 .wpulike {
   display: inline-block;
+}
+
+.bbp-topic-tags a {
+  background: #64aac3;
+  color: #fff;
+  padding: 4px 11px;
+  border-radius: 50px;
+  margin: 0 3px;
+}
+.bbp-topic-tags a:hover {
+
 }

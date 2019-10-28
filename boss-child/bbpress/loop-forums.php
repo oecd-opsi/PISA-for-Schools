@@ -24,7 +24,7 @@
 		</ul>
 
 	</li><!-- .bbp-header -->
-	<p class="subheader">This is the community homepage with clickable links that will open to the discussions.</p>
+	<p class="subheader">Click the forum headings below to join the discussions.</p>
 
 	<li class="bbp-body">
 

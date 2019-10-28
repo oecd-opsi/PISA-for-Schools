@@ -209,18 +209,6 @@ function bs_activity_topic_text_for_poll( $activity_text, $user_id, $topic_id, $
 }
 add_filter( 'bbp_activity_topic_create', 'bs_activity_topic_text_for_poll', 40, 4);
 
-// Minify sidenav if forum or Case study form pages
-function bs_minify_sidenav() {
-
-  // if ( ! is_admin() &&  ! bp_is_home() && ( is_bbpress() || is_page( 1657 ) || is_page( 2198 ) ) ) {
-  if ( ! is_admin() && ! bp_is_home() && ! is_bbpress() && ! is_page( 1657 ) && is_user_logged_in() ) {
-    echo '<script>document.addEventListener( "DOMContentLoaded", function(){ document.querySelector("body").classList.remove("left-menu-open"); } );</script>';
-  }
-
-}
-add_action( 'wp_footer', 'bs_minify_sidenav' );
-
-
 /*
  * Get the most recently replied-to topics, and their most recent reply
  * from https://www.daggerhart.com/bbpress-recent-replies-shortcode/
@@ -651,6 +639,17 @@ function bs_pisa_admin_notice() {
 	<?php
 	}
 
+  // Get the total number of users for the current query. I use (int) only for sanitize.
+	$users_count = count( get_users( array( 'fields' => array( 'ID' ), 'role' => 'pending' ) ) );
+	// Echo a string and the value
+	if ( $users_count > 0 ) {
+	?>
+	<div class="notice notice-warning is-dismissible">
+        <p><a href="<?php admin_url(); ?>users.php?role=pending"><strong><?php echo sprintf( __( 'There are %d Pending Users', 'opsi' ), $users_count ); ?></strong></a></p>
+    </div>
+	<?php
+	}
+
 }
 add_action( 'admin_notices', 'bs_pisa_admin_notice', 100 );
 
@@ -906,3 +905,23 @@ function bs_casestudystatus( $output = '', $atts, $instance ) {
 	return;
 }
 add_shortcode( 'case-study-status', 'bs_casestudystatus', 100, 3 );
+
+// Notify approved user
+add_action ( 'set_user_role', 'bs_notify_pending_user', 10, 3 );
+function bs_notify_pending_user( $user_id, $role, $old_roles ) {
+
+	if ( !in_array( 'pending', $old_roles ) ) {
+		return;
+	}
+
+	if ( $role && $role != 'pending' ) {
+
+		// notify the user
+		$subject = 'Your account on PISA for Schools has been approved';
+		$body    = 'Your account on the PISA for Schools has been approved. You may visit <a href="'. bp_core_get_user_domain( $user_id ) .'">your profile here</a>.';
+		$headers = array('Content-Type: text/html; charset=UTF-8');
+		wp_mail( get_the_author_meta( 'user_email', $user_id ), $subject, $body, $headers );
+
+	}
+
+}

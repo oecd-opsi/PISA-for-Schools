@@ -110,7 +110,7 @@ function bs_redirect_homepage(){
 // Redirect not logged users to home if trying to access a private page
 add_action ( 'template_redirect', 'bs_redirect_visitors_to_homepage' );
 function bs_redirect_visitors_to_homepage(){
-  if ( !is_user_logged_in() && !is_front_page() && !is_page( array( 2425, 1387, 2422, 2419, 1690, 1653, 2507 ) ) && ! is_post_type_archive( 'bp_doc' ) ) {
+  if ( !is_user_logged_in() && !is_front_page() && !is_page( array( 2425, 1387, 2422, 2419, 1690, 1653, 2507 ) ) && ! is_post_type_archive( 'bp_doc' ) && ! is_page( 'lostpassword' ) ) {
     wp_redirect( home_url() ) ;
     exit();
   }
@@ -918,7 +918,7 @@ function bs_notify_pending_user( $user_id, $role, $old_roles ) {
 
 		// notify the user
 		$subject = 'Your account on PISA for Schools has been approved';
-		$body    = 'Your account on the PISA for Schools has been approved. You may visit <a href="'. bp_core_get_user_domain( $user_id ) .'">your profile here</a>.';
+		$body    = 'Your account on the PISA for Schools has been approved. <a href="' . get_page_link(1657) . '">Join the discussion here</a>';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		wp_mail( get_the_author_meta( 'user_email', $user_id ), $subject, $body, $headers );
 

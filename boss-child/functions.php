@@ -917,8 +917,8 @@ function bs_notify_pending_user( $user_id, $role, $old_roles ) {
 	if ( $role && $role != 'pending' ) {
 
 		// notify the user
-		$subject = 'Your account on PISA for Schools has been approved';
-		$body    = 'Your account on the PISA for Schools has been approved. <a href="' . get_page_link(1657) . '">Join the discussion here</a>';
+		$subject = get_field( 'user_approved_notification_subject', 'option' );
+		$body    = get_field( 'user_approved_notification_mail', 'option' );
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		wp_mail( get_the_author_meta( 'user_email', $user_id ), $subject, $body, $headers );
 

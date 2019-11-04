@@ -43,11 +43,69 @@
 
 		<?php
 		if ( 1781 === bbp_get_forum_id() ) {
-			bbp_list_forums( array(
-				'separator' => '',
-				'show_topic_count' => false,
-        'show_reply_count' => false,
-			) );
+			// bbp_list_forums( array(
+			// 	'separator' => '',
+			// 	'link_before' => '<li class="bbp-forum"><img src="' . get_stylesheet_directory_uri().'/images/flags/'.$sub_forum->ID.'.png' . '" alt="" />',
+			// 	'show_topic_count' => false,
+      //   'show_reply_count' => false,
+			// ) );
+			// Define used variables
+	    $output = $sub_forums = $topic_count = $reply_count = $counts = '';
+	    $i = 0;
+	    $count = array();
+
+	    // Parse arguments against default values
+	    $r = bbp_parse_args( $args, array(
+	        'before'            => '<ul class="bbp-forums-list">',
+	        'after'             => '</ul>',
+	        'link_before'       => '<li class="bbp-forum">',
+	        'link_after'        => '</li>',
+	        'count_before'      => ' (',
+	        'count_after'       => ')',
+	        'count_sep'         => ', ',
+	        'separator'         => '',
+	        'forum_id'          => '',
+	        'show_topic_count'  => false,
+	        'show_reply_count'  => false,
+	    ), 'list_forums' );
+
+	    // Loop through forums and create a list
+	    $sub_forums = bbp_forum_get_subforums( $r['forum_id'] );
+	    if ( !empty( $sub_forums ) ) {
+
+        // Total count (for separator)
+        $total_subs = count( $sub_forums );
+        foreach ( $sub_forums as $sub_forum ) {
+          $i++; // Separator count
+
+          // Get forum details
+          $count     = array();
+          $show_sep  = $total_subs > $i ? $r['separator'] : '';
+          $permalink = bbp_get_forum_permalink( $sub_forum->ID );
+          $title     = bbp_get_forum_title( $sub_forum->ID );
+
+          // Show topic count
+          if ( !empty( $r['show_topic_count'] ) && !bbp_is_forum_category( $sub_forum->ID ) ) {
+              $count['topic'] = bbp_get_forum_topic_count( $sub_forum->ID );
+          }
+
+          // Show reply count
+          if ( !empty( $r['show_reply_count'] ) && !bbp_is_forum_category( $sub_forum->ID ) ) {
+              $count['reply'] = bbp_get_forum_reply_count( $sub_forum->ID );
+          }
+
+          // Counts to show
+          if ( !empty( $count ) ) {
+              $counts = $r['count_before'] . implode( $r['count_sep'], $count ) . $r['count_after'];
+          }
+
+          // Build this sub forums link
+          $output .= '<li class="bbp-forum"><img src="' . get_stylesheet_directory_uri().'/images/flags/'.get_field('country_iso_code',$sub_forum->ID).'.png' . '" alt="" />' . '<a href="' . esc_url( $permalink ) . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'];
+        }
+
+        // Output the list
+        echo apply_filters( 'bbp_list_forums', $r['before'] . $output . $r['after'], $r );
+	    }
 		} else {
 			bbp_list_forums(array(
 				'show_topic_count' => false,

@@ -1076,7 +1076,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 /* Log In Page */
-#post-2425 {
+.tml-action-login .type-page,
+.tml-action-lostpassword .type-page {
 	max-width: 860px;
 	margin: auto;
 }
@@ -1091,6 +1092,16 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .bp-docs-container .item-list-tabs li a {
+	padding: 10px !important;
+}
+
+.bp-docs #buddypress {
+	background: #fff;
+	padding: 30px;
+  box-sizing: content-box;
+}
+
+.bp-docs #buddypress .item-list-tabs li a {
 	padding: 10px !important;
 }
 

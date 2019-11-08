@@ -163,11 +163,11 @@ function bs_display_forum_banner() {
 }
 add_action( 'buddyboss_inside_wrapper', 'bs_display_forum_banner', 40 );
 
-// Add widget area on top of forum pages
-function bs_forum_top_widgets_init() {
+// Add widget area on side of forum pages
+function bs_forum_side_widgets_init() {
 
 	register_sidebar( array(
-		'name'          => 'Forum top',
+		'name'          => 'Forum side',
 		'id'            => 'forum_top',
 		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
@@ -176,4 +176,4 @@ function bs_forum_top_widgets_init() {
 	) );
 
 }
-add_action( 'widgets_init', 'bs_forum_top_widgets_init' );
+add_action( 'widgets_init', 'bs_forum_side_widgets_init' );

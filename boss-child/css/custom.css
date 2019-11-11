@@ -1212,3 +1212,15 @@ input.bpmts-feedback-form-submit-button {
 .form-intro-message h3 {
   margin-top: 1.5rem;
 }
+
+#bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
+  color: #042c41;
+}
+
+/* IE10+ CSS styles go here */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #whats-new-form select, .editfield select:not([multiple]), #notifications-bulk-management select, #messages-bulk-management select, .field-visibility select, .register-section select, .bbp-form select, #bp-group-course, #bbp_group_forum_id,
+  #buddypress table.notifications input, #send_message_form input[type='checkbox'], #profile-edit-form input[type='checkbox'], #profile-edit-form input[type='radio'], #message-threads input, #settings-form input[type='radio'], #create-group-form input[type='radio'], #create-group-form input[type='checkbox'], #group-settings-form input[type='radio'], #group-settings-form input[type='checkbox'], #new-post input[type='checkbox'], .bbp-form input[type='checkbox'], .bbp-form [type='radio'].input, .register-section [type='radio'].input, .register-section input[type='checkbox'], .message-check, #select-all-messages {
+    opacity: 1 !important;
+  }
+}

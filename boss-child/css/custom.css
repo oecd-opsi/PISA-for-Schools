@@ -1217,6 +1217,10 @@ input.bpmts-feedback-form-submit-button {
   color: #042c41;
 }
 
+.bbp-topic-revision-log {
+  display: none;
+}
+
 /* IE10+ CSS styles go here */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   #whats-new-form select, .editfield select:not([multiple]), #notifications-bulk-management select, #messages-bulk-management select, .field-visibility select, .register-section select, .bbp-form select, #bp-group-course, #bbp_group_forum_id,

@@ -60,7 +60,7 @@ function bs_show_courses_to_students_instructors() {
   endif;
 
 }
-add_action ( 'template_redirect', 'bs_show_courses_to_students_instructors', 1);
+// add_action ( 'template_redirect', 'bs_show_courses_to_students_instructors', 1);
 
 //* Hide WP dashboard by user role
 function bs_disable_dashboard() {

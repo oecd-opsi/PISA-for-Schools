@@ -127,6 +127,8 @@
 				do_action( 'bp_signup_password_confirm_errors' ); ?>
 				<input type="password" name="signup_password_confirm" id="signup_password_confirm" value="" class="password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/>
 
+				<p><small><?php _e('Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).', 'buddypress') ?></small></p>
+
 				<?php
 
 				/**

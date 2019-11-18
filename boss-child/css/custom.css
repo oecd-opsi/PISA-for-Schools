@@ -1077,7 +1077,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 /* Log In Page */
 .tml-action-login .type-page,
-.tml-action-lostpassword .type-page {
+.tml-action-lostpassword .type-page,
+.tml-action-resetpass .type-page {
 	max-width: 860px;
 	margin: auto;
 }

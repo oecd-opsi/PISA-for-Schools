@@ -242,7 +242,7 @@ function custom_bbpress_recent_replies_by_topic($atts){
   $args = array(
     'posts_per_page' => $show,
     'post_type' => $post_types,
-    'post__in' => $reply_ids,
+    // 'post__in' => $reply_ids,
     'orderby' => 'date',
     'order' => 'DESC'
   );

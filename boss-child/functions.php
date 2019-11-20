@@ -716,15 +716,15 @@ function add_user_to_country_group( $user_id, $role, $old_roles ) {
 add_action( 'set_user_role', 'add_user_to_country_group', 10, 3 );
 
 // give to ambassador the keymaster forum role
-function make_ambassador_keymaster() {
-  $user = wp_get_current_user();
-  $roles_array = array( 'ambassador' );
-  if( array_intersect( $roles_array, $user->roles ) ) {
-  // bbp_add_forums_roles();
-    bbp_set_user_role( $user->ID, 'bbp_keymaster' );
-  }
-}
-add_action( 'init', 'make_ambassador_keymaster' );
+// function make_ambassador_keymaster() {
+//   $user = wp_get_current_user();
+//   $roles_array = array( 'ambassador' );
+//   if( array_intersect( $roles_array, $user->roles ) ) {
+//   // bbp_add_forums_roles();
+//     bbp_set_user_role( $user->ID, 'bbp_keymaster' );
+//   }
+// }
+// add_action( 'init', 'make_ambassador_keymaster' );
 
 // Enable visual editor in bbPress
 function bbp_enable_visual_editor( $args = array() ) {

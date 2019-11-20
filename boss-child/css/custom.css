@@ -351,6 +351,10 @@ body.role-student .bp-courses-nav {
 	display: list-item;
 }
 
+#post-1781 .main-forum-sidebar {
+  display: none;
+}
+
 #bbp-forum-1781 .bbp-forums-list li {
 	display: block;
 	font-size: 14px;

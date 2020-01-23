@@ -67,7 +67,8 @@
   right: 18px;
 }
 
-.bs-close-forum-banner {
+.bs-close-forum-banner,
+#close-notice {
   width: auto;
   padding: 8px 10px;
   line-height: 1;

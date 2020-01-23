@@ -369,23 +369,22 @@ function case_map_func() {
   $output .= '};';
 
   // jvectorMap creation
-  $output .= "
-  $('#world-map').vectorMap({
+  $output .= "$('#world-map').vectorMap({
     map: 'world_mill',
     backgroundColor: '#042C41',
     regionStyle: {
-			initial: {
-				fill: 'white',
-				'fill-opacity': .95,
-			},
-			hover: {
-				'fill-opacity': 1
-			},
-			selected: {
-				fill: 'yellow'
-			},
-			selectedHover: {}
-		},
+      initial: {
+        fill: 'white',
+        'fill-opacity': .95,
+      },
+      hover: {
+        'fill-opacity': 1
+      },
+      selected: {
+        fill: 'yellow'
+      },
+      selectedHover: {}
+    },
     series: {
       regions: [{
         values: countriesData,
@@ -393,15 +392,14 @@ function case_map_func() {
         normalizeFunction: 'linear'
       }]
     },
-    onRegionTipShow: function(e, el, code){
-      if ( countriesData[code] > 0 ) {
-        el.html( '<div class=\"map-tips\">' + el.html() + ' (N. of cases: ' + countriesData[code] + ')</div>' );
+    onRegionTipShow: function(e, el, code) {
+      if (countriesData[code] > 0) {
+        el.html('<div class=\"map-tips\">' + el.html() + ' (N. of cases: ' + countriesData[code] + ')</div>');
       } else {
-        el.html( '<div class=\"map-tips\">' + el.html() + ' (No cases submitted)</div>' );
+        el.html('<div class=\"map-tips\">' + el.html() + ' (No cases submitted)</div>');
       }
     }
-  });
-  ";
+  });";
 
   $output .= '</script>';
 

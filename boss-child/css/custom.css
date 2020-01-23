@@ -1230,7 +1230,26 @@ input.bpmts-feedback-form-submit-button {
 /* IE10+ CSS styles go here */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   #whats-new-form select, .editfield select:not([multiple]), #notifications-bulk-management select, #messages-bulk-management select, .field-visibility select, .register-section select, .bbp-form select, #bp-group-course, #bbp_group_forum_id,
-  #buddypress table.notifications input, #send_message_form input[type='checkbox'], #profile-edit-form input[type='checkbox'], #profile-edit-form input[type='radio'], #message-threads input, #settings-form input[type='radio'], #create-group-form input[type='radio'], #create-group-form input[type='checkbox'], #group-settings-form input[type='radio'], #group-settings-form input[type='checkbox'], #new-post input[type='checkbox'], .bbp-form input[type='checkbox'], .bbp-form [type='radio'].input, .register-section [type='radio'].input, .register-section input[type='checkbox'], .message-check, #select-all-messages {
+  #buddypress table.notifications input, #send_message_form input[type='checkbox'], #profile-edit-form input[type='checkbox'], #profile-edit-form input[type='radio'], #message-threads input, #settings-form input[type='radio'], #create-group-form input[type='radio'], #create-group-form input[type='checkbox'],
+  #group-settings-form input[type='radio'], #group-settings-form input[type='checkbox'], #new-post input[type='checkbox'], .bbp-form input[type='checkbox'],
+  .bbp-form [type='radio'].input, .register-section [type='radio'].input, .register-section input[type='checkbox'], .message-check, #select-all-messages {
     opacity: 1 !important;
   }
+}
+
+/* Sitewide notice */
+#sitewide-notice {
+  background-color: rgba(0,0,0,.02);
+  color: rgba(0,0,0,.8);
+  padding: 20px;
+}
+
+#buddypress div#message p, div#sitewide-notice div#message p {
+  padding: 6px 100px 6px 20px;
+  border-bottom: none;
+}
+
+#close-notice {
+  float: right;
+  margin-right: 68px;
 }

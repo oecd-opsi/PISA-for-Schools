@@ -707,7 +707,7 @@ function add_user_to_country_group( $user_id, $role, $old_roles ) {
   $group_id = BP_Groups_Group::group_exists( $country_slug );
   // add user to group
   if ( $group_id ) {
-    groups_accept_invite( $user_id, $group_id );
+    groups_join_group( $group_id, $user_id );
   }
 
 }

@@ -1253,3 +1253,8 @@ input.bpmts-feedback-form-submit-button {
   float: right;
   margin-right: 68px;
 }
+
+.pisa-library-intro {
+  margin-bottom: 3rem;
+  max-width: 680px;
+}

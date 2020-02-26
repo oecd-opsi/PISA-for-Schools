@@ -711,7 +711,7 @@ function add_user_to_country_group( $user_id, $role, $old_roles ) {
   }
 
 }
-add_action( 'set_user_role', 'add_user_to_country_group', 10, 3 );
+add_action( 'set_user_role', 'add_user_to_country_group', 30, 3 );
 
 // give to ambassador the keymaster forum role
 // function make_ambassador_keymaster() {
@@ -908,3 +908,16 @@ function bs_notify_pending_user( $user_id, $role, $old_roles ) {
 	}
 
 }
+
+// Add text on the top of Docs page
+function bs_docs_before_doc_header() {
+  echo '<p class="pisa-library-intro">This library contains short video case studies, webinar recordings, best practices and analysis. If you have content that may be of use to other members, please add it here by clicking on Create New Doc.</p>';
+}
+add_action( 'bp_docs_before_doc_header', 'bs_docs_before_doc_header' );
+
+// Show most recent replies first in Topic view
+function change_reply_order() {
+  $args['order'] = 'DESC';
+  return $args;
+}
+add_filter('bbp_before_has_replies_parse_args', 'change_reply_order');

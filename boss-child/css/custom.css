@@ -1258,3 +1258,7 @@ input.bpmts-feedback-form-submit-button {
   margin-bottom: 3rem;
   max-width: 680px;
 }
+
+ .padding40 {
+   padding: 40px;
+ }

@@ -24,7 +24,7 @@
 
 		// display form to ask for the code
 		?>
-		<form>
+		<form class="padding40">
 			<label for="code">Insert your registration code</label>
 			<input id="code" name="code" type="text" />
 			<input id="submit" type="submit" value="Submit your code"></input>
@@ -76,7 +76,7 @@
 			// check limit
 			if( $limit == 0 ) {
 
-				echo '<p>The code you used to register is expired. Contact OECD PISA or <a href="/register/">try again</a>.</p>';
+				echo '<p class="padding40">The code you used to register is expired. Contact OECD PISA or <a href="/register/">try again</a>.</p>';
 
 			} else {
 
@@ -539,7 +539,7 @@
 		} else {
 
 			// code is wrong
-			echo '<p>The code you used to register is wrong. Contact OECD PISA or <a href="/register/">try again</a>.</p>';
+			echo '<p class="padding40">The code you used to register is wrong. Contact OECD PISA or <a href="/register/">try again</a>.</p>';
 
 		}
 

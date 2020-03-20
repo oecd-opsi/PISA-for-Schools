@@ -921,3 +921,6 @@ function change_reply_order() {
   return $args;
 }
 add_filter('bbp_before_has_replies_parse_args', 'change_reply_order');
+
+// Remove user activation
+add_filter( 'bp_registration_needs_activation', '__return_false' );

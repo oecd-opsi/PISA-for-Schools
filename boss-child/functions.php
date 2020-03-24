@@ -828,10 +828,10 @@ function bs_signup_custom_column( $str, $column_name, $signup_object ) {
 add_filter( 'bp_members_signup_custom_column', 'bs_signup_custom_column', 1, 3 );
 
 // Disable activation email
-function disable_activation_email() {
-  return false;
-}
-add_filter( 'bp_core_signup_send_activation_key', 'disable_activation_email' );
+// function disable_activation_email() {
+//   return false;
+// }
+// add_filter( 'bp_core_signup_send_activation_key', 'disable_activation_email' );
 
 // Disable tinyMCE in registration page
 function bs_remove_rich_text_registration_fields( $field_id = null ) {

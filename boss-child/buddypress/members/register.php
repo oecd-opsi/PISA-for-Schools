@@ -488,7 +488,7 @@
 							<?php if ( bp_registration_needs_activation() ) : ?>
 								<p><?php _e( 'Thank you for registering to join the community. We will contact you by email as soon as your registration is approved.', 'buddypress' ); ?></p>
 							<?php else : ?>
-								<p><?php _e( 'You have successfully created your account! Please log in using the username and password you have just created.', 'buddypress' ); ?></p>
+								<p><?php _e( 'You have successfully created your account! Check your e-mail for the account activation link.', 'buddypress' ); ?></p>
 							<?php endif; ?>
 						</div>
 

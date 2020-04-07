@@ -1162,6 +1162,14 @@ body:not(.boxed) #bbpress-forums .subheader {
 	display: none;
 }
 
+#field_10,
+#field_14,
+#field_15 {
+  cursor: default;
+  background-color: #cac5c4;
+  pointer-events: none;
+}
+
 .required-note {
 	color: #D04432;
 }

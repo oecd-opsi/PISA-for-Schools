@@ -252,19 +252,22 @@
 											$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 											$field_type->edit_field_html( array(
 												'value'			=> $school,
-												'disabled'	=> 'true',
+												// 'disabled'	=> 'true',
+												'tabindex'	=> -1
 											) );
 										} elseif ('field_14' == $input_name ) {
 											$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 											$field_type->edit_field_html( array(
 												'value'			=> $city,
-												'disabled'	=> 'true',
+												// 'disabled'	=> 'true',
+												'tabindex'	=> -1
 											) );
 										} elseif ('field_15' == $input_name ) {
 											$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 											$field_type->edit_field_html( array(
 												'value'			=> $country,
-												'disabled'	=> 'true',
+												// 'disabled'	=> 'true',
+												'tabindex'	=> -1
 											) );
 										} else {
 											$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );

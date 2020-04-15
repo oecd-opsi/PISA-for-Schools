@@ -1036,7 +1036,9 @@ body:not(.boxed) #bbpress-forums .subheader {
 	margin-right: 8px;
 }
 
-.single-case .side-column .school-details p {
+.single-case .side-column .school-details p,
+.single-case .content-container p,
+.single-case .content-container h3 {
 	margin-bottom: 1em;
 }
 

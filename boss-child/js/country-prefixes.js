@@ -1,9 +1,9 @@
 jQuery(document).ready(function($){
 
-  $(document).on( 'change', 'input#field_15', function(e){
+  // $(document).on( 'change', 'input#field_15', function(e){
 
     // get input value and phone field object
-    var country = $(this).val(),
+    var country = $('input#field_15').val(),
         phoneField = $('input#field_17');
 
     // set a delay before acting
@@ -17,12 +17,12 @@ jQuery(document).ready(function($){
           }
         } );
         var prefix = countryObj.dial_code;
-        // insert the prefix inside the field 
+        // insert the prefix inside the field
         phoneField.val(prefix);
       });
 
-    }, 500);
+    }, 1000);
 
-  });
+  // });
 
 });

@@ -38,6 +38,7 @@
 				}
 			});
 		</script>
+		<p>Don't have a registration code, but you'd like more information? Click <a href="https://www.oecd.org/pisa/pisa-for-schools/">here</a> or contact <a href="mailto:PISAforSchools@oecd.org">PISAforSchools@oecd.org</a>.</p>
 		<?php
 
 	else: // if parameter is set
@@ -136,8 +137,6 @@
 							do_action( 'template_notices' ); ?>
 
 						</div>
-
-						<p><?php _e( 'If your school <a href="https://www.oecd.org/PISA/pisa-for-schools/">participates in the PISA for Schools project</a>, fill in the fields below, and we\'ll get an account set up for you as soon as possible.', 'buddypress' ); ?></p>
 
 						<?php
 

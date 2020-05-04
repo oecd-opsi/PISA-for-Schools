@@ -925,3 +925,15 @@ add_filter('bbp_before_has_replies_parse_args', 'change_reply_order');
 
 // Remove user activation
 add_filter( 'bp_registration_needs_activation', '__return_false' );
+
+// Author avatar shortcode
+function author_avatar() {
+  global $post;
+  return bp_core_fetch_avatar( array(
+    'item_id'   => $post->post_author,
+    'object'    => 'user',
+    'width'     => 50,
+    'height'    => 50,
+  ) );
+}
+add_shortcode( 'author-avatar', 'author_avatar' );

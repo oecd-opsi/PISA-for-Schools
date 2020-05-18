@@ -108,10 +108,15 @@ add_action('admin_init', 'bs_hide_admin_bar');
 //* Add role class to body
 function bs_add_role_to_body($classes) {
 
-	global $current_user;
-	$user_role = $current_user->roles[0];
+	if ( is_user_logged_in() ) {
 
-	$classes .= ' role-'. $user_role;
+		global $current_user;
+		$user_role = $current_user->roles ? $current_user->roles[0] : '';
+
+		$classes .= ' role-'. $user_role;
+		
+	}
+
 	return $classes;
 
 }

@@ -1,3 +1,17 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /*--------------------------------------------------------------
 This is your custom stylesheet.
 
@@ -112,7 +126,8 @@ You're the boss, so have fun editing!
 .screen-reader-text {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -145,11 +160,14 @@ input {
 @media screen and (min-width: 481px) {
 	body.left-menu-open #mastlogo #logo img {
 		width: auto;
-		transform: translateY(40px);
+		-webkit-transform: translateY(40px);
+		    -ms-transform: translateY(40px);
+		        transform: translateY(40px);
 	}
 
 	#mastlogo {
-		box-shadow: none !important;
+		-webkit-box-shadow: none !important;
+		        box-shadow: none !important;
 	}
 
   body.left-menu-open #mastlogo,
@@ -211,16 +229,21 @@ body.logged-in #menu-item-2636 {
 .metaslider .slides > li,
 .metaslider .slides > li > img  {
 	height: 500px;
-	object-fit: cover;
-	object-position: center;
+	-o-object-fit: cover;
+	   object-fit: cover;
+	-o-object-position: center;
+	   object-position: center;
 }
 
 .caption-wrap {
 	top: 50% !important;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   bottom: auto !important;
   padding: 60px 136px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 28px;
 	font-weight: bold;
 }
@@ -257,12 +280,18 @@ body.logged-in #menu-item-2636 {
   padding: 10px 25px;
   font-weight: bold;
   font-family: Rubik;
+  background-image: -o-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0) 50%,rgba(0,0,0,0));
+  background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(0,0,0,0)),color-stop(50%, rgba(0,0,0,0)),to(rgba(0,0,0,0)));
   background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0) 50%,rgba(0,0,0,0));
   border-radius: 14px;
+	-webkit-transition: background-image .2s ease-in-out;
+	-o-transition: background-image .2s ease-in-out;
 	transition: background-image .2s ease-in-out;
 }
 
 .vc_btn3.vc_btn3-size-lg:hover {
+	background-image: -o-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1) 50%,rgba(0,0,0,.1));
+	background-image: -webkit-gradient(linear,left top, left bottom,from(rgba(0,0,0,0)),color-stop(50%, rgba(0,0,0,.1)),to(rgba(0,0,0,.1)));
 	background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1) 50%,rgba(0,0,0,.1));
 }
 
@@ -364,8 +393,10 @@ body.role-student .bp-courses-nav {
 	display: inline-block;
 	width: 22px;
 	height: 14px;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .bbp-forum-details .table-cell {
@@ -440,7 +471,8 @@ body.role-student .bp-courses-nav {
 #post-1657 .entry-header {
 	border: 0;
   clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -457,7 +489,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 #post-1657 .bbp-header .bbp-forum-freshness {
 	padding-left: 56px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 @media screen and (min-width: 960px) {
@@ -504,7 +537,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 #post-1657 .bbp-forum-info,
 #post-1657 .bbp-forum-topic-count,
 #post-1657 .bbp-forum-reply-count {
-  box-shadow: 1px 0 0 0 #fff;
+  -webkit-box-shadow: 1px 0 0 0 #fff;
+          box-shadow: 1px 0 0 0 #fff;
 }
 
 #post-1657 li.bbp-body .forums-wrapper .bbp-forum-info {
@@ -614,20 +648,28 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .bbpress-recent-reply-row {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	margin-left: 25px !important;
 	border-bottom: 1px solid rgba(0,0,0,.11);
 	padding: 25px 0;
 }
 
 .recent-replies-avatar {
-	flex: 1;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	min-width: 52px;
 }
 .recent-replies-avatar img {
-	object-fit: cover;
-	object-position: center;
+	-o-object-fit: cover;
+	   object-fit: cover;
+	-o-object-position: center;
+	   object-position: center;
 	width: 52px;
 	height: 52px;
 	border-radius: 52px;
@@ -636,7 +678,9 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .recent-replies-body {
 	margin-right: 25px;
-	flex: 3;
+	-webkit-box-flex: 3;
+	    -ms-flex: 3;
+	        flex: 3;
 }
 
 .recent-replies-author {
@@ -653,7 +697,9 @@ body:not(.boxed) #bbpress-forums .subheader {
 
 .recent-replies-time-diff {
 	color: #0076A0;
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .type-forum .entry-title {
@@ -666,9 +712,15 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .type-forum .bbp-forum-details {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 16px 70px;
 }
 
@@ -720,8 +772,12 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .form-btns-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 
 .form-btns-wrapper .button,
@@ -758,7 +814,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 	float: left;
 	width: 74%;
 	padding: 0 16px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 #case-form p {
@@ -816,7 +873,6 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .case-study-form-widget-area ul .step-wrapper a.active {
-	-moz-box-shadow: inset 0 0 1000px rgba(0,0,0,.30);
 	-webkit-box-shadow: inset 0 0 1000px rgba(0,0,0,.30);
 	box-shadow: inset 0 0 1000px rgba(0,0,0,.30);
 	pointer-events: none;
@@ -843,7 +899,9 @@ body:not(.boxed) #bbpress-forums .subheader {
 	padding: 6px 13px !important;
 }
 [data-taxonomy="description-tag"] .acf-checkbox-list {
-	columns: 3;
+	-webkit-columns: 3;
+	   -moz-columns: 3;
+	        columns: 3;
 }
 
 /* Case studies Archive */
@@ -854,7 +912,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 .case-study-archive-content {
 	float: left;
 	width: 76%;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .side-filters {
 	float: left;
@@ -873,9 +932,15 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .filter-bar-top {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: #f5f5f5;
   padding: 8px 16px
 }
@@ -885,40 +950,71 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .case-study-card header {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 8px 0;
   border-bottom: 1px solid #f5f5f5;
   margin-bottom: 16px;
 }
 
 .case-study-card header .post-country {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .case-study-card header .post-country img {
 	width: 48px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 48px;
+          flex: 0 0 48px;
 	margin-left: 8px;
 }
 
+.case-study-card header .post-country  a {
+  display: block;
+  text-align: right;
+}
+
 .case-study-card .case-card-content {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 }
 
 .case-study-card .case-card-left-column {
-	flex-basis: 20%;
+	-ms-flex-preferred-size: 20%;
+	    flex-basis: 20%;
 }
 
 .case-study-card .case-card-left-column .author {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	margin-bottom: 16px;
 }
 
 .case-study-card .case-card-left-column .author img {
 	margin-right: 12px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 50px;
+          flex: 0 0 50px;
 }
 
 .case-study-card .case-card-left-column .author a {
@@ -932,11 +1028,12 @@ body:not(.boxed) #bbpress-forums .subheader {
 	background: #f5f5f5;
 	border-radius: 6px;
 	margin: 4px;
-	white-space: nowrap;
+	/* white-space: nowrap; */
 }
 
 .case-study-card .case-card-right-column {
-	flex-basis: 80%;
+	-ms-flex-preferred-size: 80%;
+	    flex-basis: 80%;
 	padding: 0 30px;
 }
 
@@ -990,15 +1087,20 @@ body:not(.boxed) #bbpress-forums .subheader {
 .single-case .main-column h2 button {
   all: inherit;
   border: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: 100%;
   padding: 0.5em 0;
 	background: #f5f5f5;
 	margin-bottom: 16px;
 	padding: 8px;
 	font-size: 22px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 
 .single-case .main-column h2 button:focus svg {
@@ -1027,8 +1129,12 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .single-case .side-column .case-country {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 20px;
   font-weight: bold;
 }
@@ -1055,8 +1161,12 @@ body:not(.boxed) #bbpress-forums .subheader {
 }
 
 .single-case .side-column .case-author .author-badge {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 16px;
 }
 
@@ -1109,7 +1219,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 .bp-docs #buddypress {
 	background: #fff;
 	padding: 30px;
-  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
 }
 
 .bp-docs #buddypress .item-list-tabs li a {
@@ -1158,7 +1269,8 @@ body:not(.boxed) #bbpress-forums .subheader {
 	padding: 30px 0;
 	line-height: 1.1;
 	margin-top: 0 !important;
-  box-shadow: -500px 0 0 0 #C6DA50, 500px 0 0 0 #C6DA50;
+  -webkit-box-shadow: -500px 0 0 0 #C6DA50, 500px 0 0 0 #C6DA50;
+          box-shadow: -500px 0 0 0 #C6DA50, 500px 0 0 0 #C6DA50;
 }
 
 .registration .field-visibility-settings-toggle,
@@ -1210,7 +1322,8 @@ input.bpmts-feedback-form-submit-button {
 
 }
 .you-can-infographic-title {
-  box-shadow: -400px 0 0 0 #64AAC3, 400px 0 0 0 #64AAC3;
+  -webkit-box-shadow: -400px 0 0 0 #64AAC3, 400px 0 0 0 #64AAC3;
+          box-shadow: -400px 0 0 0 #64AAC3, 400px 0 0 0 #64AAC3;
 }
 
 .my-account #secondary {

@@ -70,6 +70,32 @@ function group_field( $group_key ) {
                         </div>
 
                         <?php
+                        $other_rel_url = get_field('materials_other_related_url');
+                        $images = get_field('materials_upload_images');
+                        $files = get_field('materials_upload_supporting_files');
+                         ?>
+                        <div class="materials">
+                          <?php
+                          if ($other_rel_url) { echo '<p>Other related URL: <a href="'. $other_rel_url .'">'. $other_rel_url .'</a></p>'; }
+
+                          if ($images) {
+                            echo '<div class="images-gallery">';
+                              foreach ($images as $image) {
+                                echo wp_get_attachment_image($image, 'medium');
+                              }
+                            echo '</div>';
+                          }
+
+                          if ($files) {
+                            echo '<div class="files-gallery"><h2>Supporting files</h2><ul>';
+                              foreach ($files as $file) {
+                                echo '<li><a href="'. $file .'">'. $file .'</a></li>';
+                              }
+                            echo '</ul></div>';
+                          } ?>
+                        </div>
+
+                        <?php
                         $video1 = get_field( 'materials_video_url_1' );
               					$video2 = get_field( 'materials_video_url_2' );
               					$video3 = get_field( 'materials_video_url_3' );

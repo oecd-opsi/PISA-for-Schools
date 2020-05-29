@@ -1389,3 +1389,8 @@ input.bpmts-feedback-form-submit-button {
  .padding40 {
    padding: 40px;
  }
+
+.questions,
+.materials > * {
+  margin-bottom: 40px;
+}

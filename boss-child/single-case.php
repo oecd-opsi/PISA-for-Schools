@@ -70,13 +70,19 @@ function group_field( $group_key ) {
                         </div>
 
                         <?php
-                        $other_rel_url = get_field('materials_other_related_url');
+                        $other_rel_urls = get_field('materials_other_related_urls');
                         $images = get_field('materials_upload_images');
                         $files = get_field('materials_upload_supporting_files');
                          ?>
                         <div class="materials">
                           <?php
-                          if ($other_rel_url) { echo '<p>Other related URL: <a href="'. $other_rel_url .'">'. $other_rel_url .'</a></p>'; }
+                          if ($other_rel_urls) {
+                            echo '<div class="other-urls"><h2>Other related URL</h2><ul>';
+                              foreach ($other_rel_urls as $url) {
+                                echo '<li><a href="'. $url[url] .'">'. $url[url] .'</a></li>';
+                              }
+                            echo '</ul></div>';
+                          }
 
                           if ($images) {
                             echo '<div class="images-gallery">';

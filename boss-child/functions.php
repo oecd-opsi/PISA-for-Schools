@@ -292,7 +292,7 @@ function custom_bbpress_recent_reply_row_template( $row_number ){
       <!-- <div class="recent-replies-avatar"><?php // echo get_avatar( get_the_author_meta( 'ID' ) ); ?></div> -->
       <div class="recent-replies-body">
         <div class="recent-replies-author"><?php the_author(); ?></div>
-        <div class="recent-replies-title"><a href="<?php the_permalink(); ?>"><?php echo $title; ?></a></div>
+        <div class="recent-replies-title"><a href="<?php bbp_reply_url( get_the_ID() ) ?>"><?php echo $title; ?></a></div>
         <div class="recent-replies-excerpt"><?php echo $excerpt; ?>...</div>
         <div class="recent-replies-forum"><a href="<?php echo $parent_forum_url ?>">In <?php echo $parent_forum_title ?></a></div>
       </div>

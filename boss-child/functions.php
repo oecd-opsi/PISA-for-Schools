@@ -937,3 +937,12 @@ function author_avatar() {
   ) );
 }
 add_shortcode( 'author-avatar', 'author_avatar' );
+
+// Return media url for BuddyPress Docs attachment if user is logged in
+function media_url_bp_doc_attachment( $att_url, $attachment ) {
+  if( is_user_logged_in() ) {
+    return wp_get_attachment_url( $attachment->ID );
+  }
+  return $att_url;
+}
+add_filter( 'bp_docs_attachment_url_base', 'media_url_bp_doc_attachment', 10, 2 );
